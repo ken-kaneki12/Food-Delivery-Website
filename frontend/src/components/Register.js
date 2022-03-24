@@ -31,6 +31,7 @@ const registerUser=async(e)=>{
       confirm_password
     },config);
     console.log(data);
+    console.log(data.status)
     localStorage.setItem('userinfo',JSON.stringify(data))
  
     setLoading(false)
