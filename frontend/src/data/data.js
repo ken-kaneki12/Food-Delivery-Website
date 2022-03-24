@@ -1,5 +1,11 @@
-import burger1 from "../img/burger3-r.png";
-import pizza1 from "../img/pizza1-r.png";
+//slider images
+import burger1 from "../img/slider_img/burger3-r.png";
+import pizza1 from "../img/slider_img/pizza1-r.png";
+//Resturants  images
+import r1 from "../img/resturant_img/bbq-burger.jpg";
+import r2 from "../img/resturant_img/naga-burger.jpg"
+import r3 from "../img/resturant_img/great-pizza.jpg"
+
 export const sliderItems = [
   {
     id: 1,
@@ -26,23 +32,105 @@ export const sliderItems = [
 ];
 
 
-// export const categories = [
-//   {
-//     id: 1,
-//     img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-//     title: "SHIRT STYLE!",
-//   },
-//   {
-//     id: 2,
-//     img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-//     title: "LOUNGEWEAR LOVE",
-//   },
-//   {
-//     id: 3,
-//     img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-//     title: "LIGHT JACKETS",
-//   },
-// ];
+export const restObj = [
+  {
+    res_id: 1,
+    res_name: "Cheap & Best Restaurant",
+    img: r1,
+    rating: 4,
+    sold: 126,
+    delivery_charge: 1,
+  },
+  {
+    res_id: 2,
+    res_name: "New Amici",
+    img: r2,
+    rating: 5,
+    sold: 58,
+    delivery_charge: 1,
+  },
+  {
+    res_id: 3,
+    res_name: "Chabaw",
+    img:r3,
+    rating: 4.5,
+    sold: 85,
+    delivery_charge: 1,
+  },
+
+  // {
+  //   res_id: 1,
+  //   res_name: "Cheap & Best Restaurent",
+  //   img: r1,
+  //   rating: 4,
+  //   sold: 126,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 2,
+  //   res_name: "New Amici",
+  //   img: "foods/naga-burger.jpg",
+  //   rating: 5,
+  //   sold: 58,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 3,
+  //   res_name: "Bismillah Hotel & Chiness Restaurent",
+  //   img: "foods/great-pizza.jpg",
+  //   rating: 4.5,
+  //   sold: 85,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 1,
+  //   res_name: "Cheap & Best Restaurent",
+  //   img: "foods/bbq-burger.jpg",
+  //   rating: 4,
+  //   sold: 126,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 2,
+  //   res_name: "New Amici",
+  //   img: "foods/naga-burger.jpg",
+  //   rating: 5,
+  //   sold: 58,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 3,
+  //   res_name: "Bismillah Hotel & Chiness Restaurent",
+  //   img: "foods/great-pizza.jpg",
+  //   rating: 4.5,
+  //   sold: 85,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 1,
+  //   res_name: "Cheap & Best Restaurent",
+  //   img: "foods/bbq-burger.jpg",
+  //   rating: 4,
+  //   sold: 126,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 2,
+  //   res_name: "New Amici",
+  //   img: "foods/naga-burger.jpg",
+  //   rating: 5,
+  //   sold: 58,
+  //   delivery_charge: 1,
+  // },
+  // {
+  //   res_id: 3,
+  //   res_name: "Bismillah Hotel & Chiness Restaurent",
+  //   img: "foods/great-pizza.jpg",
+  //   rating: 4.5,
+  //   sold: 85,
+  //   delivery_charge: 1,
+  // },
+];
 
 // export const popularProducts = [
 //   {
