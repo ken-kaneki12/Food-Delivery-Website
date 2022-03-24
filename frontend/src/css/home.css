@@ -1,0 +1,33 @@
+.order--now--btn {
+    background-color: orangered;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    color: white;
+    font-size: 25px;
+    font-family: "Righteous", cursive;
+    font-weight: 100;
+  }
+  
+  .dont--wait {
+    font-size: 70px;
+  }
+  .order--now--btn:hover {
+    background-color: rgb(212, 57, 1);
+    cursor: pointer;
+  }
+  
+  .homepage-section {
+    height: 90vh;
+    align-items: center;
+  }
+  
+  .homepage-pizza {
+    width: 120%;
+  }
+  
+  .font-italic {
+    font-style: italic;
+    font-size: 25px;
+  }

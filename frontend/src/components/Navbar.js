@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Search,ShoppingCartTwoTone } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
+import {NavLink} from "react-router-dom";
 
 const Container = styled.div`
   height: 50px;
@@ -49,6 +50,9 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
 `;
+// const Nav=styled.NavLink`
+// color:white
+// `;
 const Navbar = () => {
   return (
     <Container>
@@ -62,7 +66,10 @@ const Navbar = () => {
         </Left>
         <Center>center</Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
+          <MenuItem>
+          <NavLink to='/register'>REGISTER</NavLink>
+ 
+          </MenuItem>
           <MenuItem>SIGN IN</MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="primary">

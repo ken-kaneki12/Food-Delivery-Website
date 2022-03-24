@@ -9,6 +9,7 @@ const { userSchema } = require("../model/dbSchema");
 
 const userCtrl = {
   register: async (req, res) => {
+    console.log(req.body)
     const { error } = registervalidate(req.body);
 
     if (error) return res.status(400).send(error.details[0].message);

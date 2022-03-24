@@ -1,5 +1,6 @@
 const express=require('express');
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+const cors=require('cors')
 const dotenv=require('dotenv');
 //import db
 require('./db/conn')
@@ -10,6 +11,7 @@ dotenv.config({ path: './config/hidden.env' });
 
 const app=express();
 //middlewares
+app.use(cors());
 app.use(cookieParser())
 app.use(express.json());
 app.use(routes);
