@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
+import axios from 'axios';
  import '../css/style.css';
 import p1 from "../img/register_img/wave.png";
 import p2 from "../img/register_img/bg.svg";
 import p3 from "../img/register_img/avatar.svg";
-import '../js/main'
+import '../js/main';
 
 import { useNavigate } from 'react-router-dom'
 const Register = () => {
@@ -12,34 +13,60 @@ const[name,setName]=useState('');
 const[email,setEmail]=useState('');
 const[password,setPassword]=useState('');
 const[confirm_password,setConfirm_password]=useState('');
-
-async function registerUser(event) {
-event.preventDefault()
- const response = await fetch('http://localhost:5000/register', {
-      method: 'POST',
+const[error,setError]=useState(false);
+const[loading,setLoading]=useState(false);
+const registerUser=async(e)=>{
+  e.preventDefault();
+  try{
+    const config={
+      headers:{
+       "Content-Type": "application/json",
+      }
+    }
+    setLoading(true)
+    const {data}=await axios.post('http://localhost:5000/register',{
+      name,
+      email,
+      password,
+      confirm_password
+    },config);
+    console.log(data);
+    localStorage.setItem('userinfo',JSON.stringify(data))
+ 
+    setLoading(false)
     
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-          name,
-          email,
-          password,
-          confirm_password
-      }),
-  })
-
-  const data = await response.json();
-   console.log(data);
- if(response.status===422 || !data){
-     window.alert('Invalid Registration');
-     console.log('Invalid Registration');
- } else{
-     window.alert("Registration Success");
-     console.log("Registration Success");
-     navigate('/login');
- }
+  }catch(error){
+  setError(error.response.data.message)
   }
+}
+
+// async function registerUser(event) {
+// event.preventDefault()
+//  const response = await axios.post('http://localhost:5000/register', {
+ 
+    
+//       headers: {
+//           'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//           name,
+//           email,
+//           password,
+//           confirm_password
+//       }),
+//   })
+
+//   const data = await response.json();
+//    console.log(data);
+//  if(response.status===422 || !data){
+//      window.alert('Invalid Registration');
+//      console.log('Invalid Registration');
+//  } else{
+//      window.alert("Registration Success");
+//      console.log("Registration Success");
+//      navigate('/login');
+//  }
+//   }
   return (
   <>
   
