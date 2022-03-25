@@ -135,11 +135,15 @@ export const restObj = [
 export const popularFoods = [
   {
     id: 1,
-    img: "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
+    img: burger1,
   },
   {
     id: 2,
     img: pizza1,
+  },
+  {
+    id: 3,
+    img: burger1,
   },
   // {
   //   id: 3,
