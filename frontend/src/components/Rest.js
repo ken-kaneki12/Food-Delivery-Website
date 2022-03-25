@@ -15,7 +15,7 @@ const Rest = () => {
     <Container>
 
      {restObj.map((restaurant)=>(
-     <RestList restaurant={restaurant}/> 
+     <RestList restaurant={restaurant} key={restaurant.id}/> 
        
     ))} 
  
