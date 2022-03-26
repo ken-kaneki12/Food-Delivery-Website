@@ -7,12 +7,11 @@ const adminCheck = async(req, res, next) => {
 
     // console.log(req.user);
     // console.log(user);
+   if(req.user.id===req.params.id || req.user.isAdmin)
+      next()
+  else return res.status(400).json({msg:'u are not allowed'});
 
-    if(!user.isAdmin) return res.status(400).json({msg:'cannot access without admin'});
-    next();
-  
- 
-  } catch (err) {
+}catch (err) {
     res.status(400).send(err);
   }
 };

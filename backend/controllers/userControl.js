@@ -9,7 +9,7 @@ const { userSchema } = require("../model/dbSchema");
 
 const userCtrl = {
   register: async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const { error } = registervalidate(req.body);
 
     if (error) return res.status(400).send(error.details[0].message);
@@ -65,7 +65,8 @@ const userCtrl = {
 
     const asToken = accessTokenGen({
       id: user.id,
-      email: user.email
+      email: user.email,
+      isAdmin:user.isAdmin
     });
 
     const rfToken = refreshTokenGen({
@@ -103,6 +104,19 @@ const userCtrl = {
      }catch(err){
     return res.status(500).json({error:err});
      }
+  },
+  userDelete:async(req,res)=>{
+    // console.log(req.user)
+    try{
+      res.status(200).json('user has been deleted')
+    }catch(err){
+      return res.status(400).json({'msg':err});
+    }
+    // if(req.user.id===req.params.id || req.user.isAdmin){
+    //   res.status(200).json('user has been deleted')
+    // }else{
+    //   res.status(403).json('u are not allowed ')
+    // }
   },
 
   refreshToken: async (req, res) => {

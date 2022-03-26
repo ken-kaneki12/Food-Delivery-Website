@@ -24,6 +24,8 @@ router.post("/login",userCtrl.login);
 
 router.get('/logout',userCtrl.logout);
 
+router.delete('/userDelete/:id',verify,adminCheck,userCtrl.userDelete);
+
 router.get('/userdetails',verify,userCtrl.userdetails);
 
 router.get('/refreshToken',userCtrl.refreshToken);
