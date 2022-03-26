@@ -22,7 +22,8 @@ const Left = styled.div`
 `;
 
 const Language = styled.div`
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
 `;
 const SearchContainer = styled.div`
@@ -58,19 +59,21 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>EN</Language>
-          <SearchContainer>
+          <Language>FOOD SWIPE</Language>
+          {/* <SearchContainer>
             <Input />
             <Search style={{color:'gray',fontSize:15}} />
-          </SearchContainer>
+          </SearchContainer> */}
         </Left>
-        <Center>center</Center>
+        {/* <Center>center</Center> */}
         <Right>
           <MenuItem>
           <NavLink to='/register'>REGISTER</NavLink>
  
           </MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem>
+          <NavLink to='/login'>LOGIN</NavLink>
+          </MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="primary">
               <ShoppingCartTwoTone/>

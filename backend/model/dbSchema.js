@@ -74,6 +74,14 @@ const schema2 = mongoose.Schema({
      type:Boolean,
      default:false
     },
+    tokens:[
+        {
+            token:{
+                type:String,
+                required:true
+            }
+        }
+    ],
     userCreateTime: {
       type: Date,
       default: Date.now,

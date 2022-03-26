@@ -15,8 +15,10 @@ const[password,setPassword]=useState('');
 const[confirm_password,setConfirm_password]=useState('');
 const[error,setError]=useState(false);
 const[loading,setLoading]=useState(false);
+
 const registerUser=async(e)=>{
   e.preventDefault();
+ 
   try{
     const config={
       headers:{
@@ -36,7 +38,11 @@ const registerUser=async(e)=>{
  
     setLoading(false)
     
+    window.alert("Registration Success");
+    navigate("/login");
+    
   }catch(error){
+    
   setError(error.response.data.message)
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
+
 const Container = styled.div`
 flex: 1;
 padding:3px;
@@ -42,7 +44,9 @@ const RestList = ({restaurant}) => {
       <Img src={restaurant.img} />
       <Info>
         <Title>{restaurant.res_name}</Title>
-        <Button>VIEW MENU</Button>
+        <Button>
+        <NavLink to='/view_menu'>VIEW MENU</NavLink>
+      </Button>
       </Info>
     </Container>
 
