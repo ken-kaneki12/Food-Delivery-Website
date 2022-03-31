@@ -51,15 +51,15 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
 `;
-// const Nav=styled.NavLink`
-// color:white
-// `;
+
 const Navbar = () => {
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Language>FOOD SWIPE</Language>
+          <Language>
+          <NavLink to='/logo' >FOOD SWIPE</NavLink>
+          </Language>
           {/* <SearchContainer>
             <Input />
             <Search style={{color:'gray',fontSize:15}} />

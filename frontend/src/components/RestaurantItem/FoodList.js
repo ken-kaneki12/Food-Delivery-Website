@@ -68,7 +68,9 @@ const Icon = styled.div`
 
 const FoodList = ({ item }) => {
   return (
+
     <Container>
+
       <Circle />
       <Image src={item.img} />
       <Info>

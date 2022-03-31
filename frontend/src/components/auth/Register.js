@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
 import axios from 'axios';
- import '../css/style.css';
-import p1 from "../img/register_img/wave.png";
-import p2 from "../img/register_img/bg.svg";
-import p3 from "../img/register_img/avatar.svg";
-import '../js/main';
+ import './css/style.css';
+import p1 from "./img/register_img/wave.png";
+import p2 from "./img/register_img/bg.svg";
+import p3 from "./img/register_img/avatar.svg";
+import './js/main';
 
 import { useNavigate } from 'react-router-dom'
 const Register = () => {

@@ -1,18 +1,18 @@
 import React from 'react'
-import Navbar from './Navbar';
+import Navbar from './Navbar/Navbar';
 import Slider from './Slider';
-import Rest from './Rest';
-import Foods from './Foods'
-import Footer from './Footer';
-import Footer2 from './Footer2';
+import Rest from './Restaurant/Rest';
+import Foods from './RestaurantItem/Foods'
+
+import Footer from './Footer/Footer';
 const Home = () => {
   return (
     <div>
-    <Navbar/>
+    {/* <Navbar/> */}
      <Slider/>
      <Rest/> 
    
-     <Footer2/>
+     <Footer/>
     </div>
   )
 }

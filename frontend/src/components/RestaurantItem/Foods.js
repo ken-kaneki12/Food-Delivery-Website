@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { popularFoods } from "../data/data";
+import { popularFoods } from "../../data/data";
 import FoodList from "./FoodList";
 
 

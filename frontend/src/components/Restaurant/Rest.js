@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { restObj } from '../data/data'
+import { restObj } from '../../data/data'
 import RestList from './RestList'
 const Container=styled.div`
 display: flex;
