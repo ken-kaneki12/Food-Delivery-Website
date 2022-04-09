@@ -74,14 +74,9 @@ const schema2 = mongoose.Schema({
      type:Boolean,
      default:false
     },
-    tokens:[
-        {
-            token:{
-                type:String,
-                required:true
-            }
-        }
-    ],
+    resetPasswordTOken:{
+    type:String
+    },
     userCreateTime: {
       type: Date,
       default: Date.now,

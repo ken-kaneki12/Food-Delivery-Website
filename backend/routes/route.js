@@ -6,6 +6,7 @@ const foodsCtrl = require('../controllers/foodControl');
 const userCtrl=require('../controllers/userControl');
 
 
+
 //foods crud routes
 router.get('/getFoods',foodsCtrl.getFood);// or router.route('/').get(controls.getProducts)
 
@@ -20,7 +21,13 @@ router.delete("/deleteFood/:postId",foodsCtrl.deleteFood);
 //user and admin crud routes
 router.post("/register",userCtrl.register);
 
+router.post("/activeEmail",userCtrl.activateEmail);
+
 router.post("/login",userCtrl.login);
+
+router.post("/forgotpassword",userCtrl.forgotPassword);
+
+router.post("/resetpassword",verify,userCtrl.resetPassword);
 
 router.get('/logout',userCtrl.logout);
 

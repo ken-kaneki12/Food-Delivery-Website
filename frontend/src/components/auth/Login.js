@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './css/style.css'
 import p1 from "./img/register_img/wave.png";
@@ -117,6 +118,10 @@ const loginUser=async(e)=>{
 
             <br />
             <input type="submit" className="btn" value="Login" />
+            <div className='sample'>
+        <h6>Don't Have an Account?</h6>
+       <span> <NavLink to='/register'>REGISTER</NavLink></span>
+        </div>
           </form>
         </div>
       </div>

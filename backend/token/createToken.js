@@ -4,6 +4,14 @@ dotenv.config({path:'./config/hidden.env'});
 
 // const token=jwt.sign({_id:user._id,email:user.email},process.env.token_secret)
 
+const activationTokenGen=(data)=>{
+
+    const obj=jwt.sign(data,process.env.activation_token,{
+        expiresIn:'1d'
+    });
+    return obj;
+    };
+
 const accessTokenGen=(data)=>{
 
 const obj=jwt.sign(data,process.env.access_token,{
@@ -18,6 +26,7 @@ const refreshTokenGen=(data)=>{
         expiresIn:'1d'
     });
     return obj; 
+    
 }
 
-module.exports={accessTokenGen,refreshTokenGen};
+module.exports={accessTokenGen,refreshTokenGen,activationTokenGen};

@@ -5,11 +5,15 @@ import { Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 
 const Container = styled.div`
-  height: 50px;
+ 
    background-color: #f1f0f063;
+   height: 70px;
+   
 `;
+const Cart=styled.div``
 const Wrapper = styled.div`
-  padding: 10px 20px;
+padding-left:25px;
+ padding-top:20px ;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +25,7 @@ const Left = styled.div`
   align-items: center;
 `;
 
-const Language = styled.div`
+const Logo = styled.div`
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -47,9 +51,10 @@ const Right = styled.div`
   
 `;
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 30px;
   cursor: pointer;
-  margin-left: 25px;
+  margin-left: 20px;
+  padding-right: 25px;
 `;
 
 const Navbar = () => {
@@ -57,9 +62,9 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>
-          <NavLink to='/logo' >FOOD SWIPE</NavLink>
-          </Language>
+          <Logo>
+          <NavLink to='/logo' ><h5>FOOD SWIPE</h5></NavLink>
+          </Logo>
           {/* <SearchContainer>
             <Input />
             <Search style={{color:'gray',fontSize:15}} />
@@ -68,16 +73,20 @@ const Navbar = () => {
         {/* <Center>center</Center> */}
         <Right>
           <MenuItem>
-          <NavLink to='/register'>REGISTER</NavLink>
+          <NavLink to='/register'><h5>REGISTER</h5></NavLink>
  
           </MenuItem>
           <MenuItem>
-          <NavLink to='/login'>LOGIN</NavLink>
+          <NavLink to='/login'><h5>LOGIN</h5></NavLink>
           </MenuItem>
           <MenuItem>
+     
             <Badge badgeContent={4} color="primary">
-              <ShoppingCartTwoTone/>
+         
+              <NavLink to='/cart'><ShoppingCartTwoTone fontSize="large" style = {{ marginBottom:8}}/></NavLink>
+             
             </Badge>
+         
           </MenuItem>
         </Right>
       </Wrapper>

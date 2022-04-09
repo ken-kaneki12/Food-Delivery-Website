@@ -1,57 +1,86 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const sendEmail=require('../utils/sendMail')
 dotenv.config({ path: "./config/hidden.env" });
-const { accessTokenGen, refreshTokenGen } = require("../token/createToken");
+const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token/createToken");
 const { registervalidate, loginvalidate } = require("../validator/validate");
 
 const { userSchema } = require("../model/dbSchema");
 
 const userCtrl = {
   register: async (req, res) => {
-    // console.log(req.body)
+ try{
     const { error } = registervalidate(req.body);
 
     if (error) return res.status(400).send(error.details[0].message);
-
-    // check duplicate email or email already in database
-    const emailchek = await userSchema.findOne({ email: req.body.email });
-
-    if (emailchek) return res.status(400).send("email already exist");
-
-    const { name, email, password, confirm_password, isAdmin } = req.body;
+     
+    const { name, email, password, confirm_password, isAdmin} = req.body;
 
     //password check
     if (password == confirm_password) {
       const password = await bcrypt.hash(req.body.password, 10);
       const confirm_password = await bcrypt.hash(req.body.confirm_password, 10);
-
-      const obj = new userSchema({
+      const obj = {
         name,
         email,
         password,
         confirm_password,
         isAdmin
-      });
+      };
+    const activation_token=activationTokenGen(
+      obj
+    );
 
-      try {
-        const createUser = await obj.save();
+    const clientUrl=`${process.env.client_url}/activate/${activation_token}`;
+     sendEmail(email,clientUrl,'verify your email')
 
-        // res.status(200).json(createUser);
-        res.status(200).send('Registration Success');
-      } catch (err) {
-        res.status(500).send(err);
-      }
+      // const createUser = await obj.save();
+        res.status(200).send('Register Success! Please activate your email to start.');
+
     } else {
       res.status(400).send("password does not match");
     }
+  } catch (err) {
+    res.status(500).send(err);
+  }
   },
 
-  login: async (req, res) => {
-    const { error } = loginvalidate(req.body);
+  activateEmail: async (req, res) => {
+    try {
+        const {activation_token} = req.body
+        const user = jwt.verify(activation_token, process.env.activation_token)
 
-    if (error) return res.status(400).send(error.details[0].message);
+        const {name, email, password, confirm_password, isAdmin} = user;
+       console.log(user)
+  // check duplicate email or email already in database
+  const emailchek = await userSchema.findOne({ email });
 
+  if (emailchek) return res.status(400).send("email already exist");
+
+  const obj = new userSchema({
+    name,
+    email,
+    password,
+    confirm_password,
+    isAdmin
+   
+  });
+  
+
+        await obj.save()
+
+        res.json({msg: "Account has been activated!"})
+
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+ 
+login: async (req, res) => {
+    const {error } = loginvalidate(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
+ try{
     const user = await userSchema.findOne({ email: req.body.email });
 
     // check user exist or not
@@ -63,12 +92,7 @@ const userCtrl = {
     if (!validpass) return res.status(400).send("Password wrong");
     const { password, ...others } = user._doc;
 
-    const asToken = accessTokenGen({
-      id: user.id,
-      email: user.email,
-      isAdmin:user.isAdmin
-    });
-
+   
     const rfToken = refreshTokenGen({
       id: user.id,
       email: user.email
@@ -76,13 +100,16 @@ const userCtrl = {
 
   res.cookie("rfToken", rfToken, {
       httpOnly: true,
-      path: "/refreshToken"
+      path: "/refreshToken",
+      maxAge:7*24*60*60*1000 //7 days
+
     });
 
-  res.header('auth-token',asToken);
   // res .status(200).json({ ...others, asToken});
    res .status(200).send('Login success');
-
+  }catch(err){
+    return res.status(400).send(error.details[0].message)
+  }
   },
 
   logout: async(req,res)=>{
@@ -93,7 +120,44 @@ const userCtrl = {
    return res.status(500).send({ error: err.message });
    }
   }, 
+  forgotPassword: async (req, res) => {
+    try {
+        const {email} = req.body
+        const user = await userSchema.findOne({email})
+        if(!user) return res.status(400).json({msg: "This email does not exist."})
 
+        const asToken = accessTokenGen({
+          id: user.id
+        }); 
+
+        res.header('auth-token',asToken);
+        // console.log(asToken)
+        const url = `${process.env.client_url}/user/reset/${asToken}`
+
+        sendEmail(email, url, "Reset your password")
+        res.json({msg: "Re-send the password, please check your email."})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+  resetPassword: async (req, res) => {
+    try {
+        const {password} = req.body
+        console.log(password)
+        // const token = req.header("Authorization");
+        // console.log(token)
+        const passwordHash = await bcrypt.hash(password, 10)
+
+        await userSchema.findOneAndUpdate({_id: req.user.id}, {
+            password: passwordHash,
+            confirm_password:passwordHash
+        })
+
+        res.json({msg: "Password successfully changed!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
   userdetails: async(req,res)=>{
      try{
      const user= await userSchema.findOne({_id:req.user.id}).select('-password').select('-confirm_password');
@@ -142,6 +206,7 @@ const userCtrl = {
       res.status(500).send({ error: err.message });
     }
   },
+
 };
 
 module.exports = userCtrl;
