@@ -5,7 +5,7 @@ const sendEmail=require('../utils/sendMail')
 dotenv.config({ path: "./config/hidden.env" });
 const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token/createToken");
 const { registervalidate, loginvalidate } = require("../validator/validate");
-
+const { userSchema } = require("../model/dbSchema");
 const authCtrl = {
   register: async (req, res) => {
     try {
@@ -13,7 +13,7 @@ const authCtrl = {
 
       if (error) return res.status(400).send(error.details[0].message);
 
-      const { name, email, password, confirm_password, isAdmin } = req.body;
+      const { name, email, password, confirm_password, role } = req.body;
 
       //password check
       if (password == confirm_password) {
@@ -27,7 +27,7 @@ const authCtrl = {
           email,
           password,
           confirm_password,
-          isAdmin,
+          role
         };
         const activation_token = activationTokenGen(obj);
 
@@ -35,9 +35,7 @@ const authCtrl = {
         sendEmail(email, clientUrl, "verify your email");
 
         // const createUser = await obj.save();
-        res
-          .status(200)
-          .send("Register Success! Please activate your email to start.");
+        res .status(200).send("Check your email.");
       } else {
         res.status(400).send("password does not match");
       }
@@ -51,8 +49,8 @@ const authCtrl = {
       const { activation_token } = req.body;
       const user = jwt.verify(activation_token, process.env.activation_token);
 
-      const { name, email, password, confirm_password, isAdmin } = user;
-      console.log(user);
+      const { name, email, password, confirm_password, role } = user;
+    //   console.log(user);
       // check duplicate email or email already in database
       const emailchek = await userSchema.findOne({ email });
 
@@ -63,7 +61,7 @@ const authCtrl = {
         email,
         password,
         confirm_password,
-        isAdmin,
+        role
       });
 
       await obj.save();
@@ -76,7 +74,7 @@ const authCtrl = {
 
   login: async (req, res) => {
     const { error } = loginvalidate(req.body);
-    // if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(error.details[0].message);
     try {
       const user = await userSchema.findOne({ email: req.body.email });
 
@@ -103,7 +101,7 @@ const authCtrl = {
       // res .status(200).json({ ...others, asToken});
       res.status(200).send("Login success");
     } catch (err) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).send(err.message);
     }
   },
 
@@ -139,13 +137,12 @@ const authCtrl = {
   resetPassword: async (req, res) => {
     try {
       const { password } = req.body;
-      console.log(password);
+    //   console.log(password);
       // const token = req.header("Authorization");
       // console.log(token)
       const passwordHash = await bcrypt.hash(password, 10);
 
-      await userSchema.findOneAndUpdate(
-        { _id: req.user.id },
+      await userSchema.findOneAndUpdate({ _id: req.user.id },
         {
           password: passwordHash,
           confirm_password: passwordHash,
@@ -157,6 +154,20 @@ const authCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-};
+  refreshToken: (req, res) => {
+    try {
+        const rf_token = req.cookies.rfToken
+        if(!rf_token) return res.status(400).json({msg: "Please login now!"})
 
+        jwt.verify(rf_token, process.env.refresh_token, (err, user) => {
+            if(err) return res.status(400).json({msg: "Please login now!"})
+
+            const access_token = accessTokenGen({id: user.id})
+            res.json({access_token})
+        })
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+}
+}
 module.exports = authCtrl;

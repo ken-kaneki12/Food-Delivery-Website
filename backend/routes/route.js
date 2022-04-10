@@ -4,6 +4,7 @@ const verify=require('../middlewares/verfitytoken');
 const adminCheck=require('../middlewares/admincheck');
 const foodsCtrl = require('../controllers/foodControl');
 const userCtrl=require('../controllers/userControl');
+const authCtrl=require('../controllers/authControl');
 
 
 
@@ -18,24 +19,32 @@ router.patch("/updateFood/:postId",foodsCtrl.updateFood);
 
 router.delete("/deleteFood/:postId",foodsCtrl.deleteFood);
 
-//user and admin crud routes
-router.post("/register",userCtrl.register);
+//authentication
+router.post("/register",authCtrl.register);
 
-router.post("/activeEmail",userCtrl.activateEmail);
+router.post("/activeEmail",authCtrl.activateEmail);
 
-router.post("/login",userCtrl.login);
+router.post("/login",authCtrl.login);
 
-router.post("/forgotpassword",userCtrl.forgotPassword);
+router.post("/forgotpassword",authCtrl.forgotPassword);
 
-router.post("/resetpassword",verify,userCtrl.resetPassword);
+router.post("/resetpassword",verify,authCtrl.resetPassword);
 
-router.get('/logout',userCtrl.logout);
+router.get('/logout',authCtrl.logout);
 
-router.delete('/userDelete/:id',verify,adminCheck,userCtrl.userDelete);
+router.get('/refreshToken',authCtrl.refreshToken);
 
-router.get('/userdetails',verify,userCtrl.userdetails);
+//Admin and user Details routes
 
-router.get('/refreshToken',userCtrl.refreshToken);
 
+router.get('/singleuser', verify, userCtrl. getSingleUser)
+
+router.get('/allusers', verify, adminCheck, userCtrl.getAllUsers)
+
+router.patch('/updateuser', verify, userCtrl.updateUser)
+
+router.patch('/update_role/:id', verify,  adminCheck, userCtrl.updateUsersRole)
+
+router.delete('/delete/:id', verify,  adminCheck, userCtrl.deleteUser)
   
 module.exports = router;

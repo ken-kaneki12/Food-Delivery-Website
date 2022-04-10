@@ -34,8 +34,7 @@ const registervalidate=(data)=>{
        email: Joi.string().email().required(),
        password:Joi.string().min(6).required(),
        confirm_password:Joi.string().min(6).required(),
-       isAdmin:Joi.boolean().default('false')
-
+       role:Joi.number().default(0)
      }
    )
 

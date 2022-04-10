@@ -70,13 +70,15 @@ const schema2 = mongoose.Schema({
       type: String,
       require: true,
     },
-    isAdmin:{
-     type:Boolean,
-     default:false
+    role:{
+     type:Number,
+     default:0
     },
-    resetPasswordTOken:{
-    type:String
+    avatar:{
+        type: String,
+        default: "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
     },
+    
     userCreateTime: {
       type: Date,
       default: Date.now,
