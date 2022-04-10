@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
  import './css/style.css';
 import p1 from "./img/register_img/wave.png";
@@ -14,8 +16,21 @@ const[name,setName]=useState('');
 const[email,setEmail]=useState('');
 const[password,setPassword]=useState('');
 const[confirm_password,setConfirm_password]=useState('');
-const[error,setError]=useState(false);
-const[loading,setLoading]=useState(false);
+const[error,setError]=useState(' ');
+const[status,setStatus]=useState(' ');
+
+const notify = (data,status) => {
+  if(status===200){
+   toast.success('REGISTRATION SUCCESS',{
+     position: 'top-center'
+   });
+
+  }else{
+ toast.error(data,{
+   position: 'top-center'
+ });
+}
+}
 
 const registerUser=async(e)=>{
   e.preventDefault();
@@ -26,25 +41,26 @@ const registerUser=async(e)=>{
        "Content-Type": "application/json",
       }
     }
-    setLoading(true)
+
     const {data}=await axios.post('http://localhost:5000/register',{
       name,
       email,
       password,
       confirm_password
     },config);
-    console.log(data);
-    console.log(data.status)
+    // console.log(data);
+    // console.log(data.status)
     localStorage.setItem('userinfo',JSON.stringify(data))
  
-    setLoading(false)
+  
     
     window.alert("Registration Success");
     navigate("/login");
     
-  }catch(error){
+  }catch(err){
     
-  setError(error.response.data.message)
+    setStatus(err.response.status)
+    setError(err.response.data)
   }
 }
 
@@ -85,6 +101,7 @@ const registerUser=async(e)=>{
     </div>
     <div className="login-content">
       <form onSubmit={registerUser}>
+      <ToastContainer />
         <img src={p3}alt=" "/>
         <h2 className="title">Welcome</h2>
         <div className="input-div one">
@@ -160,7 +177,7 @@ const registerUser=async(e)=>{
           </div>
         </div>
         <br />
-        <input type="submit" className="btn" value="Register" />
+        <input type="submit" className="btn" value="Register" onClick={()=>notify(error,status)}/>
         <div className='sample'>
         <h6>Already have an account?</h6>
        <span> <NavLink to='/login'>LOGIN</NavLink></span>

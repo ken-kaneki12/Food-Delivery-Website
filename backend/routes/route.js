@@ -43,8 +43,8 @@ router.get('/allusers', verify, adminCheck, userCtrl.getAllUsers)
 
 router.patch('/updateuser', verify, userCtrl.updateUser)
 
-router.patch('/update_role/:id', verify,  adminCheck, userCtrl.updateUsersRole)
+router.patch('/updaterole/:id', verify,  adminCheck, userCtrl.updateUsersRole)
 
-router.delete('/delete/:id', verify,  adminCheck, userCtrl.deleteUser)
+router.delete('/deleteuser/:id', verify,  adminCheck, userCtrl.deleteUser)
   
 module.exports = router;

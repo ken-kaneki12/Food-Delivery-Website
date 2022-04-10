@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './css/style.css'
@@ -6,15 +8,35 @@ import p1 from "./img/register_img/wave.png";
 import p2 from "./img/register_img/bg.svg";
 import p3 from "./img/register_img/avatar.svg";
 import './js/main';
-import { useNavigate } from 'react-router-dom'
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+import {dispatchLogin} from '../redux/actions/authAction';
+import {useDispatch} from 'react-redux'
+
+const Login = () => {  
+
+
 const navigate = useNavigate();
-// const[name,setName]=useState('');
 const[email,setEmail]=useState('');
 const[password,setPassword]=useState('');
-// const[confirm_password,setConfirm_password]=useState('');
-const[error,setError]=useState(false);
-const[loading,setLoading]=useState(false);
+
+const[error,setError]=useState({});
+const[success,setSuccess]=useState(true);
+const[status,setStatus]=useState(' ');
+const dispatch=useDispatch()
+
+ const notify = (data,status) => {
+   if(status===200){
+    toast.success('LOG IN SUCCESS',{
+      position: 'top-center'
+    });
+
+   }else{
+  toast.error(data,{
+    position: 'top-center'
+  });
+ }
+}
+
 const loginUser=async(e)=>{
   e.preventDefault();
   try{
@@ -23,21 +45,24 @@ const loginUser=async(e)=>{
        "Content-Type": "application/json",
       }
     }
-    setLoading(true)
+    
     const {data}=await axios.post('http://localhost:5000/login',{
       email,
       password
     },config);
-    console.log(data);
-    console.log(data.status)
-    localStorage.setItem('userinfo',JSON.stringify(data))
- 
-    setLoading(false)
-    window.alert("Login Success");
+    // console.log(data);
+    // console.log(data.status)
+    localStorage.setItem('userinfo',JSON.stringify(data));
+    setStatus(200);
+    dispatch(dispatchLogin())
+    // window.alert("Login Success");
     navigate("/");
     
-  }catch(error){
-  setError(error.response.data.message)
+  }catch(err){
+      // console.log(err.response.data)
+   setStatus(err.response.status)
+    setError(err.response.data)
+    
   }
 }
 
@@ -77,7 +102,12 @@ const loginUser=async(e)=>{
           <img src={p2} alt=" " />
         </div>
         <div className="login-content">
-          <form onSubmit={loginUser}>
+       
+        
+       
+        
+          <form onSubmit={loginUser} >
+          <ToastContainer />
             <img src={p3} alt=" " />
             <h2 className="title">Welcome</h2>
 
@@ -117,11 +147,14 @@ const loginUser=async(e)=>{
             </div>
 
             <br />
-            <input type="submit" className="btn" value="Login" />
+            <input type="submit" className="btn" value="Login"  onClick={()=>notify(error,status)}/>
             <div className='sample'>
         <h6>Don't Have an Account?</h6>
        <span> <NavLink to='/register'>REGISTER</NavLink></span>
+      
         </div>
+        
+        <span > <NavLink to='/forgotpassword' style={{color: "red",fontWeight:"500",fontSize:"20px",paddingLeft:"100px"}}>Forgot Password</NavLink></span>
           </form>
         </div>
       </div>
