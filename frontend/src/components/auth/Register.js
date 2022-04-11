@@ -42,7 +42,7 @@ const registerUser=async(e)=>{
       }
     }
 
-    const {data}=await axios.post('http://localhost:5000/register',{
+    const {data}=await axios.post('/register',{
       name,
       email,
       password,

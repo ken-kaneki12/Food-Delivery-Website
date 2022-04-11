@@ -93,8 +93,9 @@ const authCtrl = {
 
       res.cookie("rfToken", rfToken, {
         httpOnly: true,
-        path: "/refreshToken",
-        maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
+        // path: "/refreshToken",
+        // maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
+        expires:new Date(Date.now()+25892000000)
       });
 
       // res .status(200).json({ ...others, asToken});
