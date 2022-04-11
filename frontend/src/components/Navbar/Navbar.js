@@ -1,16 +1,15 @@
-import React from "react";
+import React,{MouseEvent} from "react";
 import styled from "styled-components";
-import { Search,ShoppingCartTwoTone } from "@material-ui/icons";
-import { Badge } from "@material-ui/core";
+import { AccountCircleOutlined, Search,ShoppingCartTwoTone } from "@material-ui/icons";
+import { Avatar, Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from 'axios'
-
 const Container = styled.div`
  
    background-color: #f1f0f063;
    height: 70px;
-   
+  
 `;
 const Cart=styled.div``
 const Wrapper = styled.div`
@@ -52,25 +51,50 @@ const Right = styled.div`
   justify-content: flex-end;
   
 `;
-const MenuItem = styled.div`
+const RightSidebar = styled.div`
   font-size: 30px;
   cursor: pointer;
   margin-left: 20px;
   padding-right: 25px;
 `;
-
+const Auth=styled.div`
+display: flex;
+`;
+const ProfileIcon=styled.div`
+display: flex;
+padding-bottom: 10px;
+`
 const Navbar = () => {
+
 const auth=useSelector(state=>state.auth);
 const{user,isLogged}=auth
 
-const userLink=()=>{
-  return <li>
-     <NavLink>
-       <img src={user.avatar} alt=""/>{user.name}
-     </NavLink>
-  </li>
+const handleLogout = async () => {
+  try {
+      await axios.get('/logout')
+      localStorage.removeItem('userinfo')
+      window.location.href = "/";
+  } catch (err) {
+      window.location.href = "/";
+  }
 }
 
+
+const userLink=()=>{
+  return <div>
+      <ProfileIcon>
+     <NavLink to='#'>
+ 
+     <Avatar alt={user.name} src={user.avatar} /> 
+     </NavLink>
+
+    <RightSidebar> 
+          <NavLink to='/'  onClick={handleLogout}><h5>LOGOUT</h5></NavLink>
+          </RightSidebar> 
+
+     </ProfileIcon>
+  </div>
+}
 
   return (
     <Container>
@@ -86,15 +110,20 @@ const userLink=()=>{
         </Left>
         {/* <Center>center</Center> */}
         <Right>
-          
-          <MenuItem>
+        {
+             isLogged?userLink():
+             <Auth>
+           <RightSidebar> 
           <NavLink to='/register'><h5>REGISTER</h5></NavLink>
- 
-          </MenuItem>
-          <MenuItem>
+          </RightSidebar> 
+          <RightSidebar> 
           <NavLink to='/login'><h5>LOGIN</h5></NavLink>
-          </MenuItem>
-          <MenuItem>
+          </RightSidebar> 
+          </Auth>
+    
+           }
+       
+          <RightSidebar>
      
             <Badge badgeContent={4} color="primary">
          
@@ -102,7 +131,7 @@ const userLink=()=>{
              
             </Badge>
          
-          </MenuItem>
+          </RightSidebar>
         </Right>
       </Wrapper>
     </Container>

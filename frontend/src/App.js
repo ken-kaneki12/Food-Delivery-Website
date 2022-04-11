@@ -18,7 +18,7 @@ const token = useSelector(state => state.token)
 useEffect(()=>{
 const userinfo=localStorage.getItem('userinfo')
 
-if(userinfo.length>0){
+if(userinfo){
   const getToken=async()=>{
    
     const res = await axios.post('/refreshToken')
@@ -54,6 +54,7 @@ useEffect(() => {
         <Route path="/login" element={<Login />} />
         <Route path="/view_menu" element={<FoodMenu/>} />
         <Route path="/cart" element={<Cart/>} />
+       
       </Routes>
     </>
   );
