@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Search,ShoppingCartTwoTone } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from 'axios'
 
 const Container = styled.div`
  
@@ -58,6 +60,18 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+const auth=useSelector(state=>state.auth);
+const{user,isLogged}=auth
+
+const userLink=()=>{
+  return <li>
+     <NavLink>
+       <img src={user.avatar} alt=""/>{user.name}
+     </NavLink>
+  </li>
+}
+
+
   return (
     <Container>
       <Wrapper>
@@ -72,6 +86,7 @@ const Navbar = () => {
         </Left>
         {/* <Center>center</Center> */}
         <Right>
+          
           <MenuItem>
           <NavLink to='/register'><h5>REGISTER</h5></NavLink>
  

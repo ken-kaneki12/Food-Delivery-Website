@@ -55,7 +55,7 @@ const loginUser=async(e)=>{
     localStorage.setItem('userinfo',JSON.stringify(data));
     setStatus(200);
     dispatch(dispatchLogin())
-    // window.alert("Login Success");
+     window.alert("Login Success");
     navigate("/");
     
   }catch(err){

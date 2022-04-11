@@ -21,7 +21,7 @@ const[status,setStatus]=useState(' ');
 
 const notify = (data,status) => {
   if(status===200){
-   toast.success('REGISTRATION SUCCESS',{
+   toast.success('CHECK YOUR EMAIL',{
      position: 'top-center'
    });
 
@@ -54,9 +54,9 @@ const registerUser=async(e)=>{
  
   
     
-    window.alert("Registration Success");
-    navigate("/login");
-    
+    // window.alert("Registration Success");
+    // navigate("/login");
+    setStatus(200);
   }catch(err){
     
     setStatus(err.response.status)

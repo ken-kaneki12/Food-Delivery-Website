@@ -14,7 +14,9 @@ const authCtrl = {
       if (error) return res.status(400).send(error.details[0].message);
 
       const { name, email, password, confirm_password, role } = req.body;
+      const emailchek = await userSchema.findOne({ email });
 
+      if (emailchek) return res.status(400).send("email already exist");
       //password check
       if (password == confirm_password) {
         const password = await bcrypt.hash(req.body.password, 10);
@@ -52,9 +54,7 @@ const authCtrl = {
       const { name, email, password, confirm_password, role } = user;
     //   console.log(user);
       // check duplicate email or email already in database
-      const emailchek = await userSchema.findOne({ email });
-
-      if (emailchek) return res.status(400).send("email already exist");
+    
 
       const obj = new userSchema({
         name,
@@ -88,8 +88,7 @@ const authCtrl = {
       const { password, ...others } = user._doc;
 
       const rfToken = refreshTokenGen({
-        id: user.id,
-        email: user.email,
+        id: user.id
       });
 
       res.cookie("rfToken", rfToken, {
@@ -154,7 +153,7 @@ const authCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  refreshToken: (req, res) => {
+  getAccessToken: (req, res) => {
     try {
         const rf_token = req.cookies.rfToken
         if(!rf_token) return res.status(400).json({msg: "Please login now!"})
@@ -168,6 +167,6 @@ const authCtrl = {
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
-}
+},
 }
 module.exports = authCtrl;
