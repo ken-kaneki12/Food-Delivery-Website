@@ -6,7 +6,7 @@ const ActivationEmail = () => {
     const{activation_token}=useParams()
     const[status,setStatus]=useState(' ');
     const[error,setError]=useState(' ');
-    console.log(activation_token)
+    // console.log(activation_token)
     useEffect(()=>{
       if(activation_token){
           const activationEmail=async()=>{
@@ -17,7 +17,7 @@ const ActivationEmail = () => {
                     }
                   }
               
-                  const res=await axios.post('http://localhost:5000/activeEmail',{activation_token})
+                  const res=await axios.post('/activeEmail',{activation_token})
                     setStatus(200)
               }catch(err){
                   setStatus(err.response.status)

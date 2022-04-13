@@ -6,7 +6,7 @@ import RatingSlide from "../LeftSidebar/RatingSlide";
 import Footer from "../Footer/Footer";
 import { Category } from "@material-ui/icons";
 import { ListItemText } from "@material-ui/core";
-
+import { useLocation } from "react-router-dom";
 const Container = styled.div``;
 const Side = styled.div`
   width: 120px;
@@ -16,7 +16,6 @@ const Title = styled.h2`
   padding: 0;
   border:0
 `;
-
 
 const FilterContainer = styled.div`
   display: flex;
@@ -42,12 +41,11 @@ const ListItem=styled.div`
 cursor: pointer;
 `;
 const FoodMenu = () => {
+  const location=useLocation();
+ const RestaurantName=location.pathname.split("/")[2]
   return (
     <Container>
       <Searchbar />
-
-     
-
       <FilterContainer>
         <Filter>
           <Side>

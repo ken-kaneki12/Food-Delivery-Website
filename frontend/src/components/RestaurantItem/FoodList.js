@@ -1,8 +1,11 @@
+import { Button,Rating } from "@material-ui/core";
 import {
   FavoriteBorderOutlined,
+  RateReview,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
+
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -46,10 +49,10 @@ const Circle = styled.div`
 `;
 
 const Image = styled.img`
-  height: 55%;
+  height: 100%;
   z-index: 2;
 `;
-
+const FoodDetails=styled.div``
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -67,12 +70,13 @@ const Icon = styled.div`
 `;
 
 const FoodList = ({ item }) => {
+
+
   return (
-
-    <Container>
-
-      <Circle />
-      <Image src={item.img} />
+ <div >
+    <Container >
+      {/* <Circle /> */}
+      <Image src={item.foodImg} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
@@ -85,6 +89,15 @@ const FoodList = ({ item }) => {
         </Icon>
       </Info>
     </Container>
+    <FoodDetails>
+    
+    <p ><b color="green">{item.foodName}</b></p>
+    
+    {item.foodRating}
+
+    </FoodDetails>
+    </div>  
+      
   );
 };
 

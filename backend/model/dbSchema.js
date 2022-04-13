@@ -3,13 +3,17 @@ const mongoose=require('mongoose');
 //for foods  details and catagory
 
 const schema1=mongoose.Schema({
+  foodId:{
+   type:String,
+   required:true
+  },  
  foodName:{
      type:String,
      required:true
  },  
 
  foodPrice:{
-    type:String,
+    type:Number,
     required:true
 },
 
@@ -32,24 +36,14 @@ foodRating:{
     type:Number,
     default:0
 },
-foodImg:[
-{
-    imgId:{
-        type:String,
-        required:true
-    },
-    imgUrl:{
-        type:String,
-        required:true
-    }
-
-} 
-],
-foodCreateTime:{
-   type:Date,
-   default:Date.now 
+foodImg:{
+    type:String,
+    require:true
 }
-});
+
+},
+{timestamps:true}
+);
 
 //for user and admin information -- user can be admin or customer
 const schema2 = mongoose.Schema({

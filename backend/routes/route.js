@@ -6,15 +6,21 @@ const userCtrl = require("../controllers/userControl");
 const authCtrl = require("../controllers/authControl");
 
 //foods crud routes
-router.get("/getFoods", foodsCtrl.getFood); // or router.route('/').get(controls.getProducts)
 
-router.post("/postFood", verify, adminCheck, foodsCtrl.postFood);
+router.post("/postFood", foodsCtrl.postFood);
+
+router.get("/getFoodById/:id", foodsCtrl.getFoodById); 
+
+router.get("/getAllFoods", foodsCtrl.getAllFoods); 
+
+// router.post("/postFood", verify, adminCheck, foodsCtrl.postFood);
+
 
 // router.route('/postFood').post(verify,adminCheck,foodsCtrl.postFood)
 
-router.patch("/updateFood/:postId", foodsCtrl.updateFood);
+router.patch("/updateFood/:id", foodsCtrl.updateFood);
 
-router.delete("/deleteFood/:postId", foodsCtrl.deleteFood);
+router.delete("/deleteFood/:id", foodsCtrl.deleteFood);
 
 //authentication
 router.post("/register", authCtrl.register);

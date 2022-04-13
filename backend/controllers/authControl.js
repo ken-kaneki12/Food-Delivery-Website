@@ -7,6 +7,7 @@ const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token
 const { registervalidate, loginvalidate } = require("../validator/validate");
 const { userSchema } = require("../model/dbSchema");
 const authCtrl = {
+
   register: async (req, res) => {
     try {
       const { error } = registervalidate(req.body);
@@ -21,9 +22,7 @@ const authCtrl = {
       if (password == confirm_password) {
         const password = await bcrypt.hash(req.body.password, 10);
         const confirm_password = await bcrypt.hash(
-          req.body.confirm_password,
-          10
-        );
+          req.body.confirm_password,  10);
         const obj = {
           name,
           email,
@@ -126,7 +125,7 @@ const authCtrl = {
 
       res.header("auth-token", asToken);
       // console.log(asToken)
-      const url = `${process.env.client_url}/user/reset/${asToken}`;
+      const url = `${process.env.client_url}/reset/${asToken}`;
 
       sendEmail(email, url, "Reset your password");
       res.json({ msg: "Re-send the password, please check your email." });
@@ -144,6 +143,7 @@ const authCtrl = {
 
       await userSchema.findOneAndUpdate({ _id: req.user.id },
         {
+          
           password: passwordHash,
           confirm_password: passwordHash,
         }

@@ -34,7 +34,7 @@ export const sliderItems = [
 
 export const restObj = [
   {
-    res_id: 1,
+    res_id: 'Cheap-&-Best-Restaurant',
     res_name: "Cheap & Best Restaurant",
     img: r1,
     rating: 4,
@@ -42,15 +42,14 @@ export const restObj = [
     delivery_charge: 1,
   },
   {
-    res_id: 2,
+    res_id: "New-Amici",
     res_name: "New Amici",
     img: r2,
     rating: 5,
-    sold: 58,
     delivery_charge: 1,
   },
   {
-    res_id: 3,
+    res_id: "Chabaw",
     res_name: "Chabaw",
     img:r3,
     rating: 4.5,

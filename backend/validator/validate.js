@@ -4,22 +4,17 @@ const Joi = require('@hapi/joi');
 const foodvalidate=(data)=>{  
 
     const schema=Joi.object({
-
+        foodId:Joi.string().required(),
         foodName:Joi.string().min(4).required(),
-        foodPrice:Joi.string().min(4).required(),
+        foodPrice:Joi.number().required(),
         foodDescription:Joi.string().min(4).required(),
         foodCategory:Joi.string().min(4).required(),
         foodStock:Joi.number().required().default(1),
-        foodRating:Joi.number().required().default(0),
-        foodImg:[
-          {
-           imgId:Joi.string().required(),
-           imgUrl:Joi.string().required(),
-        }
-         ]
-
+        foodRating:Joi.number().default(0),
+        foodImg:Joi.string().required()
       }
     )
+    
  
    return Joi.validate(data,schema)
 };

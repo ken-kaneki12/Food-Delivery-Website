@@ -45,7 +45,7 @@ const RestList = ({restaurant}) => {
       <Info>
         <Title>{restaurant.res_name}</Title>
         <Button>
-        <NavLink to='/view_menu'>VIEW MENU</NavLink>
+        <NavLink to={`/RestaurantMenu/${restaurant.res_id}`}>VIEW MENU</NavLink>
       </Button>
       </Info>
     </Container>
