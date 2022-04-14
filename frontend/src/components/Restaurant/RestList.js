@@ -41,11 +41,11 @@ const RestList = ({restaurant}) => {
   return (
   
 <Container>
-      <Img src={restaurant.img} />
+      <Img src={restaurant.RestImg} />
       <Info>
-        <Title>{restaurant.res_name}</Title>
+        <Title>{restaurant.RestName}</Title>
         <Button>
-        <NavLink to={`/RestaurantMenu/${restaurant.res_id}`}>VIEW MENU</NavLink>
+        <NavLink to={`/RestaurantMenu/${restaurant.RestId}`}>VIEW MENU</NavLink>
       </Button>
       </Info>
     </Container>

@@ -4,6 +4,7 @@ const adminCheck = require("../middlewares/admincheck");
 const foodsCtrl = require("../controllers/foodControl");
 const userCtrl = require("../controllers/userControl");
 const authCtrl = require("../controllers/authControl");
+const restaurantCtrl=require("../controllers/restaurantControl");
 
 //foods crud routes
 
@@ -48,5 +49,12 @@ router.patch("/updateuser", verify, userCtrl.updateUser);
 router.patch("/updaterole/:id", verify, adminCheck, userCtrl.updateUsersRole);
 
 router.delete("/deleteuser/:id", verify, adminCheck, userCtrl.deleteUser);
+
+//Restaurant
+
+router.post("/postRest",restaurantCtrl.postRest);
+
+router.get("/getAllRest",restaurantCtrl.getAllRest);
+
 
 module.exports = router;

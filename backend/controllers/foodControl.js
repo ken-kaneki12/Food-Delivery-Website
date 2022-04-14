@@ -89,7 +89,7 @@ try{
         }
     },
     getAllFoods:async(req,res)=>{
-      console.log(req.query)
+      // console.log(req.query)
       const features=new Api(foodSchema.find({}),req.query).filtering().sorting().paginating()
       
       const foods= await features.query;

@@ -69,14 +69,14 @@ const Icon = styled.div`
   }
 `;
 
-const FoodList = ({ item }) => {
+const FoodList = ({ items }) => {
 
 
   return (
  <div >
     <Container >
       {/* <Circle /> */}
-      <Image src={item.foodImg} />
+      <Image src={items.foodImg} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
@@ -91,9 +91,9 @@ const FoodList = ({ item }) => {
     </Container>
     <FoodDetails>
     
-    <p ><b color="green">{item.foodName}</b></p>
+    <p ><b color="green">{items.foodName}</b></p>
     
-    {item.foodRating}
+    {items.foodRating}
 
     </FoodDetails>
     </div>  

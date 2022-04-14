@@ -1,16 +1,17 @@
 const mongoose=require('mongoose');
 
 //for foods  details and catagory
-
 const schema1=mongoose.Schema({
   foodId:{
    type:String,
    required:true
   },  
+
  foodName:{
      type:String,
      required:true
  },  
+
 
  foodPrice:{
     type:Number,
@@ -140,10 +141,54 @@ const schema2 = mongoose.Schema({
    
    
    });
+
+ //Restaurant Info and name
+ 
+ const schema5=mongoose.Schema({
+    RestId:{
+        type:String,
+        unique:true,
+        required:true
+       },  
+     
+      RestName:{
+          type:String,
+          unique:true,
+          required:true
+      },  
+      RestEmail: {
+        type: String,
+        unique:true,
+        required: true,
+      },
+      RestLocation:{
+         type:String,
+         required:true
+     },
+     
+     RestDescription:{
+         type:String,
+         required:true
+     },
+   
+    RestRating:{
+         type:Number,
+         default:0
+     },
+    RestImg:{
+         type:String,
+         unique:true,
+         require:true
+     }
+     
+     },
+     {timestamps:true}
+ )
    
 const foodSchema =mongoose.model('foods',schema1);
 const userSchema =mongoose.model('users',schema2);//user can be admin or customer
 const orderSchema =mongoose.model('orders',schema3);
 const cartSchema =mongoose.model('cart',schema4);
+const restSchema =mongoose.model('restaurants',schema5);
 
-module.exports={foodSchema,userSchema,orderSchema,cartSchema};
+module.exports={foodSchema,userSchema,orderSchema,cartSchema,restSchema};
