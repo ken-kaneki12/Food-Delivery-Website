@@ -87,7 +87,7 @@ const FoodList = ({ items }) => {
         </Icon>
         <Icon>
       
-        <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}`}><PageviewOutlined/></NavLink>
+        <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id}`}><PageviewOutlined/></NavLink>
          
         </Icon>
         <Icon>

@@ -1,4 +1,7 @@
 import { Add, Remove } from "@material-ui/icons";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 
@@ -111,25 +114,49 @@ const Button = styled.button`
   }
 `;
 
-const SingleFood = () => {
+const SingleFood = ({singleItem}) => {
+const [singlefood,setSinglefood]=useState('');
+const [status,setStatus]=useState('');
+const {id}=useParams();
+console.log(id)
+useEffect(()=>{
+  const getSingleFood=async()=>{
+    try{ 
+       const config={
+           headers:{
+            "Content-Type": "application/json",
+           }
+         }
+       const res=await axios.get(`/getSingleFood/${id}`,config)
+        // console.log(res.data)
+       setStatus(200)
+       setSinglefood(res.data)
+       }catch(err){
+         setStatus(err.status)
+       }  
+   }
+   getSingleFood()
+},[])
+
+
   return (
     <Container>
   
-  
       <Wrapper>
         <ImgContainer>
-          <Image src="https://res.cloudinary.com/cse347/image/upload/v1649970253/FoodSwipe/Dominose/3_aakwsp.webp" />
+          <Image src={singlefood.foodImg}/>
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
+          <Title>{singlefood.foodName}</Title>
           <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          <h3>{singlefood.foodDescription}</h3>
+            {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
             iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
             tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
+            condimentum ac, volutpat ornare. */}
           </Desc>
-          <Price>$ 20</Price>
+          <Price>Tk {singlefood.foodPrice}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>

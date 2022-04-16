@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { popularFoods } from "../../data/data";
 import FoodList from "./FoodList";
 import { useParams } from "react-router-dom";
+import SingleFood from "../singleFoodpage/SingleFood";
 
 
 const Container = styled.div`
@@ -18,7 +19,7 @@ const Foods = ({RestaurantName,filters,sort}) => {
   const[foods,setFoods]=useState([])
   const[status,setStatus]=useState('')
   const {Restaurant}=useParams()
-  console.log(Restaurant)
+  // console.log(Restaurant)
   useEffect(()=>{
     const getAllFoods=async()=>{
       try{ 
@@ -43,6 +44,7 @@ const Foods = ({RestaurantName,filters,sort}) => {
       {foods.map((item,pos) => (
         <FoodList items={item} key={pos} />
       ))}
+     
     </Container>
   );
 };

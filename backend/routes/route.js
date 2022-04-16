@@ -10,7 +10,7 @@ const restaurantCtrl=require("../controllers/restaurantControl");
 
 router.post("/postFood", foodsCtrl.postFood);
 
-router.get("/getFoodById/:id", foodsCtrl.getFoodById); 
+router.get("/getSingleFood/:id", foodsCtrl.getSingleFood); 
 
 router.get("/getAllFoods", foodsCtrl.getAllFoods); 
 

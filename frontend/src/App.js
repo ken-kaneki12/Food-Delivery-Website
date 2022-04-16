@@ -63,7 +63,7 @@ const preventRefresh = (e) => {
         <Route path="/login" element={<Login />} />
         <Route path="/sample" element={<SingleFood/>}/>
         <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} onClick={preventRefresh}/>
-        <Route path="/SingleFood/:foodRestId/:foodName" element={<SingleFood/>} />
+        <Route path="/SingleFood/:foodRestId/:foodName/:id" element={<SingleFood/>} />
 
         <Route path="/cart" element={<Cart/>} />
        
