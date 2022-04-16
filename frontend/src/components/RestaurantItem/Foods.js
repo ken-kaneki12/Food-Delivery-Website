@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from "styled-components";
 import { popularFoods } from "../../data/data";
 import FoodList from "./FoodList";
+import { useParams } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -16,7 +17,8 @@ const Foods = ({RestaurantName,filters,sort}) => {
   // console.log(RestaurantName,filters,sort)
   const[foods,setFoods]=useState([])
   const[status,setStatus]=useState('')
-  
+  const {Restaurant}=useParams()
+  console.log(Restaurant)
   useEffect(()=>{
     const getAllFoods=async()=>{
       try{ 
@@ -25,7 +27,7 @@ const Foods = ({RestaurantName,filters,sort}) => {
               "Content-Type": "application/json",
              }
            }
-         const res=await axios.get('/getAllFoods',config)
+         const res=await axios.get(`/getAllFoods?restId=${Restaurant}`,config)
           // console.log(res.data)
          setStatus(200)
          setFoods(res.data)

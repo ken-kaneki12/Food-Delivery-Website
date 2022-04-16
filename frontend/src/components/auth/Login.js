@@ -24,6 +24,7 @@ const[success,setSuccess]=useState(true);
 const[status,setStatus]=useState(' ');
 const dispatch=useDispatch()
 
+
  const notify = (data,status) => {
    if(status===200){
     toast.success('LOG IN SUCCESS',{

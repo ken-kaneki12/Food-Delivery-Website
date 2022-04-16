@@ -1,10 +1,14 @@
-import { Button,Rating } from "@material-ui/core";
+
 import {
   FavoriteBorderOutlined,
   RateReview,
   SearchOutlined,
+  PreviewIcon,
   ShoppingCartOutlined,
+  Pageview,
+  PageviewOutlined,
 } from "@material-ui/icons";
+import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -82,7 +86,9 @@ const FoodList = ({ items }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+      
+        <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}`}><PageviewOutlined/></NavLink>
+         
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />

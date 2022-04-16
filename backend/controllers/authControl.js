@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const sendEmail=require('../utils/sendMail')
+// const sendEmail2=require('../utils/sendMail2')
 dotenv.config({ path: "./config/hidden.env" });
 const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token/createToken");
 const { registervalidate, loginvalidate } = require("../validator/validate");
@@ -27,9 +28,9 @@ const authCtrl = {
           name,
           email,
           password,
-          confirm_password,
-          role
+          confirm_password
         };
+
         const activation_token = activationTokenGen(obj);
 
         const clientUrl = `${process.env.client_url}/activate/${activation_token}`;

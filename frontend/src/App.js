@@ -8,7 +8,7 @@ import Login from "../src/components/auth/Login";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import Navbar from "./components/Navbar/Navbar";
 import FoodMenu from "./components/RestaurantItem/FoodMenu";
-import Sample from './components/Sample/Sample'
+import SingleFood from "./components/singleFoodpage/SingleFood";
 import Cart from "./components/Cart/Cart";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
@@ -45,7 +45,7 @@ useEffect(() => {
 },[token,dispatch])
 const preventRefresh = (e) => {
   e.preventDefault();
-  console.log("refresh prevented");
+
 };
 
   return (
@@ -56,13 +56,15 @@ const preventRefresh = (e) => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/logo" element={<Home />} />
+        <Route path="/RestaurantList" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/activate/:activation_token" element={<ActivationEmail />} />
         <Route path="/forgotpassword" element={<ForgotPassword/>} />
         <Route path="/login" element={<Login />} />
-        <Route path="/sample" element={<Sample/>}/>
+        <Route path="/sample" element={<SingleFood/>}/>
         <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} onClick={preventRefresh}/>
+        <Route path="/SingleFood/:foodRestId/:foodName" element={<SingleFood/>} />
+
         <Route path="/cart" element={<Cart/>} />
        
       </Routes>

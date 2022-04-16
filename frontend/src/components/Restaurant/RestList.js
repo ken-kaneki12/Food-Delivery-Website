@@ -4,14 +4,15 @@ import {NavLink} from "react-router-dom";
 
 const Container = styled.div`
 flex: 1;
-padding:3px;
-height: 70vh;
+padding:10px;
+width: 100%;
+height: 40vh;
+
 position: relative;
 `;
 const Img = styled.img`
-width: 100%;
+width:100%;
 height: 100%;
-//crop image use object-fit
 object-fit: cover;
 `;
 const Info = styled.div`
@@ -37,9 +38,10 @@ cursor: pointer;
 transition: all 1.5s ease; 
 
 `;
+
 const RestList = ({restaurant}) => {
   return (
-  
+
 <Container>
       <Img src={restaurant.RestImg} />
       <Info>
@@ -49,6 +51,7 @@ const RestList = ({restaurant}) => {
       </Button>
       </Info>
     </Container>
+
 
   )
 }

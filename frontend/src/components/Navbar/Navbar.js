@@ -101,7 +101,7 @@ const userLink=()=>{
       <Wrapper>
         <Left>
           <Logo>
-          <NavLink to='/logo' ><h5>FOOD SWIPE</h5></NavLink>
+          <NavLink to='/RestaurantList' ><h5>FOOD SWIPE</h5></NavLink>
           </Logo>
           {/* <SearchContainer>
             <Input />

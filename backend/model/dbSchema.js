@@ -2,6 +2,11 @@ const mongoose=require('mongoose');
 
 //for foods  details and catagory
 const schema1=mongoose.Schema({
+    
+    foodRestId:{
+   type:String,
+   required:true
+    } ,
   foodId:{
    type:String,
    required:true
@@ -108,22 +113,19 @@ const schema2 = mongoose.Schema({
    status:{
        type:String,
        default:"pending"
-   },
-       orderTime:{
-           type:Date,
-           default:Date.now
-       }
-   
-   
-   });
+   } 
+   },  {timestamps:true});
+
 
    // cart information
+
    const schema4=mongoose.Schema({
     userId:{
           type:String,
           required:true
        },
       foods:[
+
       {
       foodId:{
           type:String

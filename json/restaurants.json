@@ -1,0 +1,90 @@
+[
+    {
+    
+        "RestId": "starkabab",
+        "RestName": "Star Kabab",
+        "RestEmail": "star@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970092/FoodSwipe/naga-burger_mowj14.jpg"
+      
+    },
+    {
+        
+        "RestId": "chilox",
+        "RestName": "Chilox",
+        "RestEmail": "chilox@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970083/FoodSwipe/bbq-burger_a0lakc.jpg"
+      
+    },
+    {
+    
+        "RestId": "kudos",
+        "RestName": "Kudos",
+        "RestEmail": "kudos@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970303/FoodSwipe/Kudos/kudos_naga_wings_njbupa.jpg"
+     
+    },
+    {
+      
+        "RestId": "absoulate",
+        "RestName": "Absoulate Thai",
+        "RestEmail": "absoulatethai@gmail.com",
+        "RestLocation": "Banani",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970011/FoodSwipe/Absoulate%20Thai-Banani/absolute_thai_seafood_spaghetti_oxavvu.jpg"
+       
+    },
+    {
+        
+        "RestId": "barbq",
+        "RestName": "Bar B Q Tonight",
+        "RestEmail": "barbq@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970205/FoodSwipe/Bar%20B%20Q%20tonight/bar_b_q_tonite_chicken_suslick_ezaxkv.jpg"
+        
+    },
+    {
+      
+        "RestId": "dominose",
+        "RestName": "Dominose",
+        "RestEmail": "dominose@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970253/FoodSwipe/Dominose/4_igdtep.webp"
+      
+    },
+    {
+     
+        "RestId": "kacchivai",
+        "RestName": "Kacchi Vai",
+        "RestEmail": "kacchi@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970094/FoodSwipe/great-pizza_xo3rps.jpg"
+       
+    },
+    {
+     
+        "RestId": "kacchivai",
+        "RestName": "Kacchi Vai",
+        "RestEmail": "kacchi@gmail.com",
+        "RestLocation": "Dhaka",
+        "RestDescription": "NA",
+        "RestRating": 4,
+        "RestImg": "https://res.cloudinary.com/cse347/image/upload/v1649970094/FoodSwipe/great-pizza_xo3rps.jpg"
+       
+    }
+]

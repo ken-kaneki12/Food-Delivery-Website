@@ -5,7 +5,6 @@ import Searchbar from "../Filter/Searchbar/Searchbar";
 import Foods from "./Foods";
 import Footer from "../Footer/Footer";
 import { Checkbox,  FormControlLabel, FormGroup} from '@material-ui/core'
-import { ListItemText } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import CheckFilter from "../Filter/LeftSidebar/CheckFilter";
 

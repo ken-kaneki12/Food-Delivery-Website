@@ -13,6 +13,7 @@ const oauth2Client = new OAuth2(
     OAUTH_PLAYGROUND 
 );
 
+
 // send mail
 const sendEmail = (to, url, txt) => {
     oauth2Client.setCredentials({
@@ -52,7 +53,7 @@ const sendEmail = (to, url, txt) => {
     }
 
     smtpTransport.sendMail(mailOptions, (err, infor) => {
-        if(err) return err;
+        if(err) return console.log(err.message);
         return infor
     })
 };

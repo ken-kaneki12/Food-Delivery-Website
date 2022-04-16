@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
-import { restObj } from '../../data/data';
 import RestList from './RestList';
 const Container=styled.div`
-display: flex;
+//display 3 restaurant at one row
+display: grid;
+grid-template-columns: repeat(3, 1fr);
 padding:20px;
 justify-content: space-between;
-/* width: 0%;  */
-height: 100vh; 
+
+/* height: 100vh;  */
 `;
    
 const Rest = () => {
