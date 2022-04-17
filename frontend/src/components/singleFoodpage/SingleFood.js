@@ -158,7 +158,7 @@ quantity>1 &&setQuantity(quantity-1)
         <InfoContainer>
           <Title>{singlefood.foodName}</Title>
           <Desc>
-          <h3>{singlefood.foodDescription}</h3>
+          {singlefood.foodDescription}
             {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
             iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget

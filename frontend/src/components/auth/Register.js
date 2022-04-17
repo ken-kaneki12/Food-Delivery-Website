@@ -42,7 +42,7 @@ const registerUser=async(e)=>{
       }
     }
 
-    const {data}=await axios.post('http://localhost:5000/register',{
+    const {data}=await axios.post('/register',{
       name,
       email,
       password,
@@ -52,45 +52,26 @@ const registerUser=async(e)=>{
     // console.log(data.status)
     localStorage.setItem('userinfo',JSON.stringify(data))
  
-  
-    
-    // window.alert("Registration Success");
-    // navigate("/login");
     setStatus(200);
+    if(data){
+      toast.success('Check Your Email',{
+        position: 'top-center'
+      });
+    }
+    // window.alert("Registration Success");
+    //  navigate("/login");
+   
   }catch(err){
-    
+    if(err){
+      toast.error(err.response.data,{
+        position: 'top-center'
+      });
+     }
     setStatus(err.response.status)
     setError(err.response.data)
   }
 }
 
-// async function registerUser(event) {
-// event.preventDefault()
-//  const response = await axios.post('http://localhost:5000/register', {
- 
-    
-//       headers: {
-//           'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//           name,
-//           email,
-//           password,
-//           confirm_password
-//       }),
-//   })
-
-//   const data = await response.json();
-//    console.log(data);
-//  if(response.status===422 || !data){
-//      window.alert('Invalid Registration');
-//      console.log('Invalid Registration');
-//  } else{
-//      window.alert("Registration Success");
-//      console.log("Registration Success");
-//      navigate('/login');
-//  }
-//   }
   return (
   <>
   
@@ -177,7 +158,7 @@ const registerUser=async(e)=>{
           </div>
         </div>
         <br />
-        <input type="submit" className="btn" value="Register" onClick={()=>notify(error,status)}/>
+        <input type="submit" className="btn" value="Register"/>
         <div className='sample'>
         <h6>Already have an account?</h6>
        <span> <NavLink to='/login'>LOGIN</NavLink></span>

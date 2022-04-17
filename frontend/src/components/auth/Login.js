@@ -25,18 +25,7 @@ const[status,setStatus]=useState(' ');
 const dispatch=useDispatch()
 
 
- const notify = (data,status) => {
-   if(status===200){
-    toast.success('LOG IN SUCCESS',{
-      position: 'top-center'
-    });
 
-   }else{
-  toast.error(data,{
-    position: 'top-center'
-  });
- }
-}
 
 const loginUser=async(e)=>{
   e.preventDefault();
@@ -52,48 +41,33 @@ const loginUser=async(e)=>{
       password
     },config);
     // console.log(data);
-    // console.log(data.status)
+
     localStorage.setItem('userinfo',JSON.stringify(data));
     setStatus(200);
     dispatch(dispatchLogin())
-     window.alert("Login Success");
+
+    if(data){
+      toast.success('LOG IN SUCCESS',{
+        position: 'top-center'
+      });
+    }
+    // window.alert("Login Success");
+
     navigate("/");
     
   }catch(err){
       // console.log(err.response.data)
+      if(err){
+        toast.error(err.response.data,{
+          position: 'top-center'
+        });
+       }
    setStatus(err.response.status)
     setError(err.response.data)
     
   }
 }
 
-// async function registerUser(event) {
-// event.preventDefault()
-//  const response = await axios.post('http://localhost:5000/register', {
- 
-    
-//       headers: {
-//           'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//           name,
-//           email,
-//           password,
-//           confirm_password
-//       }),
-//   })
-
-//   const data = await response.json();
-//    console.log(data);
-//  if(response.status===422 || !data){
-//      window.alert('Invalid Registration');
-//      console.log('Invalid Registration');
-//  } else{
-//      window.alert("Registration Success");
-//      console.log("Registration Success");
-//      navigate('/login');
-//  }
-//   }
   return (
   <>
   
@@ -106,7 +80,7 @@ const loginUser=async(e)=>{
        
         
        
-        
+      
           <form onSubmit={loginUser} >
           <ToastContainer />
             <img src={p3} alt=" " />
@@ -148,7 +122,8 @@ const loginUser=async(e)=>{
             </div>
 
             <br />
-            <input type="submit" className="btn" value="Login"  onClick={()=>notify(error,status)}/>
+            {/* onClick={()=>notify(error,status)} */}
+            <input type="submit" className="btn" value="Login"  />
             <div className='sample'>
         <h6>Don't Have an Account?</h6>
        <span> <NavLink to='/register'>REGISTER</NavLink></span>

@@ -36,14 +36,24 @@ const forgotPass=async(e)=>{
       email
     },config);
    
-
+    if(data){
+      toast.success('Check Your Email',{
+        position: 'top-center'
+      });
+    }
     setStatus(200);
 
-     window.alert("Email send");
+    //  window.alert("Email send");
     // navigate("/");
     
   }catch(err){
       // console.log(err.response.data)
+      
+      if(err){
+        toast.error(err.response.data,{
+          position: 'top-center'
+        });
+       }
    setStatus(err.response.status)
     setError(err.response.data)
     
@@ -65,7 +75,7 @@ const forgotPass=async(e)=>{
     
         
           <form onSubmit={forgotPass}  >
-          
+          <ToastContainer />
             <img src={p3} alt=" " />
             <h2 className="title">Welcome</h2>
 

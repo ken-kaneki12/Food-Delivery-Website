@@ -48,4 +48,12 @@ const loginvalidate=(data)=>{
  return Joi.validate(data,schema)
 };
 
-module.exports={foodvalidate,registervalidate,loginvalidate};
+const forgotpassvalidate=(data)=>{
+  const schema=Joi.object({
+    email: Joi.string().email().required(),
+
+  }
+)
+return Joi.validate(data,schema)
+}
+module.exports={foodvalidate,registervalidate,loginvalidate,forgotpassvalidate};

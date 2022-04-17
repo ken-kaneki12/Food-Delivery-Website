@@ -39,7 +39,6 @@ router.get("/logout", authCtrl.logout);
 router.post("/refreshToken", authCtrl.getAccessToken);
 
 //Admin and user Details routes
-
 router.get("/singleuser", verify, userCtrl.getSingleUser);
 
 router.get("/allusers", verify, adminCheck, userCtrl.getAllUsers);

@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const sendEmail=require('../utils/sendMail')
 dotenv.config({ path: "./config/hidden.env" });
 const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token/createToken");
-const { registervalidate, loginvalidate } = require("../validator/validate");
+const { registervalidate, loginvalidate,forgotpassvalidate } = require("../validator/validate");
 const { userSchema } = require("../model/dbSchema");
 const authCtrl = {
 
@@ -112,11 +112,13 @@ const authCtrl = {
     }
   },
   forgotPassword: async (req, res) => {
+    const { error } = forgotpassvalidate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
     try {
       const { email } = req.body;
       const user = await userSchema.findOne({ email });
       if (!user)
-        return res.status(400).json({ msg: "This email does not exist." });
+        return res.status(400).send(  "This email does not exist.");
 
       const asToken = accessTokenGen({
         id: user.id,

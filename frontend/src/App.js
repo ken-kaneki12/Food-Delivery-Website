@@ -10,12 +10,15 @@ import Navbar from "./components/Navbar/Navbar";
 import FoodMenu from "./components/RestaurantItem/FoodMenu";
 import SingleFood from "./components/singleFoodpage/SingleFood";
 import Cart from "./components/Cart/Cart";
+import NotFound from "./components/utils/NotFound/NotFound";
 import { Routes, Route } from "react-router-dom";
+import AuthOutlet from "./privateRoute/AuthOutlet"
 import axios from "axios";
 
 function App() {
 const dispatch=useDispatch()
-const auth=useSelector(state=>state.token)
+const auth=useSelector(state=>state.auth)
+
 const token = useSelector(state => state.token)
 useEffect(()=>{
 const userinfo=localStorage.getItem('userinfo')
@@ -57,16 +60,21 @@ const preventRefresh = (e) => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/RestaurantList" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/activate/:activation_token" element={<ActivationEmail />} />
-        <Route path="/forgotpassword" element={<ForgotPassword/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sample" element={<SingleFood/>}/>
+      
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+      <Route path="activate/:activation_token" element={<ActivationEmail />} />
+        <Route path="forgotpassword" element={<ForgotPassword/>} />
+        <Route path="/sample" element={<NotFound/>}/>
         <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} onClick={preventRefresh}/>
-        <Route path="/SingleFood/:foodRestId/:foodName/:id" element={<SingleFood/>} />
 
-        <Route path="/cart" element={<Cart/>} />
+        <Route  element={<AuthOutlet/>}>
+
+          <Route path="/SingleFood/:foodRestId/:foodName/:id" element={<SingleFood/>} />
+        </Route>
        
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </>
   );

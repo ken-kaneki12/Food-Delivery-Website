@@ -23,7 +23,7 @@ const Rest = () => {
               "Content-Type": "application/json",
              }
            }
-         const res=await axios.get('/getAllRest',config)
+         const res=await axios.get('getAllRest',config)
           // console.log(res.data)
          setStatus(200)
          setRest(res.data)
@@ -38,8 +38,8 @@ const Rest = () => {
   return (
     <Container>
 
-     {rest.map((restaurant)=>(
-     <RestList restaurant={restaurant} key={restaurant.id}/> 
+     {rest.map((restaurant,pos)=>(
+     <RestList restaurant={restaurant} key={pos}/> 
        
     ))} 
  
