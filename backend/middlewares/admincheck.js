@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+
 const { userSchema } = require("../model/dbSchema");
 const adminCheck = async(req, res, next) => {
  

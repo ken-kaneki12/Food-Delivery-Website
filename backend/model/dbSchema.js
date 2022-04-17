@@ -118,7 +118,6 @@ const schema2 = mongoose.Schema({
 
 
    // cart information
-
    const schema4=mongoose.Schema({
     userId:{
           type:String,
@@ -135,17 +134,17 @@ const schema2 = mongoose.Schema({
          default:1 
       }
        }
-   ],
-       cartCreateTime:{
-           type:Date,
-           default:Date.now
-       }
+   ]
+    //    cartCreateTime:{
+    //        type:Date,
+    //        default:Date.now
+    //    }
    
    
-   });
+   },{timestamps:true});
+
 
  //Restaurant Info and name
- 
  const schema5=mongoose.Schema({
     RestId:{
         type:String,

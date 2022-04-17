@@ -89,11 +89,12 @@ const AmountContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 700;
+  cursor:pointer
 `;
 
 const Amount = styled.span`
-  width: 30px;
-  height: 30px;
+  width: 70px;
+  height: 40px;
   border-radius: 10px;
   border: 1px solid teal;
   display: flex;
@@ -116,9 +117,10 @@ const Button = styled.button`
 
 const SingleFood = ({singleItem}) => {
 const [singlefood,setSinglefood]=useState('');
+const[quantity,setQuantity]=useState(1);
 const [status,setStatus]=useState('');
 const {id}=useParams();
-console.log(id)
+/* console.log(id) */
 useEffect(()=>{
   const getSingleFood=async()=>{
     try{ 
@@ -138,7 +140,14 @@ useEffect(()=>{
    getSingleFood()
 },[])
 
+const handleQuantity=(type)=>{
+if(type==="dec"){
 
+quantity>1 &&setQuantity(quantity-1)
+}else{
+  setQuantity(quantity+1)
+}
+}
   return (
     <Container>
   
@@ -177,9 +186,9 @@ useEffect(()=>{
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={()=>handleQuantity("dec")}/>
+              <Amount><h4>{quantity}</h4></Amount>
+              <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>

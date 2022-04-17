@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const sendEmail=require('../utils/sendMail')
-// const sendEmail2=require('../utils/sendMail2')
 dotenv.config({ path: "./config/hidden.env" });
 const { accessTokenGen, refreshTokenGen,activationTokenGen } = require("../token/createToken");
 const { registervalidate, loginvalidate } = require("../validator/validate");
@@ -35,7 +34,6 @@ const authCtrl = {
 
         const clientUrl = `${process.env.client_url}/activate/${activation_token}`;
         sendEmail(email, clientUrl, "verify your email");
-
         // const createUser = await obj.save();
         res .status(200).send("Check your email.");
       } else {
@@ -129,7 +127,7 @@ const authCtrl = {
       const url = `${process.env.client_url}/reset/${asToken}`;
 
       sendEmail(email, url, "Reset your password");
-      res.json({ msg: "Re-send the password, please check your email." });
+      res.status(200).json({ msg: "Re-send the password, please check your email." });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

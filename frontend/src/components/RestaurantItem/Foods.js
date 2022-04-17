@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios'
 import styled from "styled-components";
-import { popularFoods } from "../../data/data";
 import FoodList from "./FoodList";
 import { useParams } from "react-router-dom";
-import SingleFood from "../singleFoodpage/SingleFood";
+
 
 
 const Container = styled.div`

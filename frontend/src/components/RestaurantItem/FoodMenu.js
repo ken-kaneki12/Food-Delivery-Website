@@ -41,9 +41,9 @@ const Select = styled.select`
   margin-right: 20px;
 `;
 const Option = styled.option``;
-const ListItem=styled.div`
+/* const ListItem=styled.div`
 padding-top: 20px;
-`;
+`; */
 const FoodMenu = () => {
   const location=useLocation();
  const RestaurantName=location.pathname.split("/")[2];
