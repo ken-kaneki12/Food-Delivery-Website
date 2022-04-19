@@ -148,6 +148,10 @@ quantity>1 &&setQuantity(quantity-1)
   setQuantity(quantity+1)
 }
 }
+
+const handleCart=()=>{
+  
+}
   return (
     <Container>
   
@@ -190,7 +194,7 @@ quantity>1 &&setQuantity(quantity-1)
               <Amount><h4>{quantity}</h4></Amount>
               <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

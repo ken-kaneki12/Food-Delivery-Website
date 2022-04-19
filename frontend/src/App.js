@@ -27,7 +27,7 @@ if(userinfo){
   const getToken=async()=>{
    
     const res = await axios.post('/refreshToken')
-    console.log(res)
+    // console.log(res)
     dispatch({type: 'GET_TOKEN', payload: res.data.access_token})
   }
   getToken()
