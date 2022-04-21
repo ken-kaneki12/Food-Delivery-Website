@@ -2,6 +2,8 @@ import ACTIONS from '../actions';
 
 const CART_INITIAL_STATE = {
   cartItems: [],
+  totalPrice:0,
+  totalQuantity:0
 };
 
  const shoppingCartReducer = (state = CART_INITIAL_STATE, action) => {

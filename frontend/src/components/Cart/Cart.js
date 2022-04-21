@@ -196,10 +196,10 @@ var filtercartItems =  cartItems.filter(item => item.product!==undefined);
               <PriceDetail>
                 <ProductAmountContainer>
                   <Add/>
-                  <ProductAmount>2</ProductAmount>
+                  <ProductAmount>{item.qty}</ProductAmount>
                   <Remove/>
                 </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
+                <ProductPrice>{item.foodPrice * item.qty}</ProductPrice>
               </PriceDetail>
             </Product>
              ))}

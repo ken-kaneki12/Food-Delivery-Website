@@ -4,6 +4,7 @@ import { AccountCircleOutlined, Search,ShoppingCartTwoTone } from "@material-ui/
 import { Avatar, Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import axios from 'axios'
 const Container = styled.div`
  
@@ -65,8 +66,10 @@ display: flex;
 padding-bottom: 10px;
 `
 const Navbar = () => {
-const cart=useSelector(state=>state.shopcart);
-//  console.log(cart)
+const cart=useSelector(state=>state.cart);
+const{cartItems}=cart;
+const  cartSize = Object.keys(cartItems).length;
+
 
 const auth=useSelector(state=>state.auth);
 const{user,isLogged}=auth
@@ -83,6 +86,9 @@ const handleLogout = async () => {
 
 
 const userLink=()=>{
+  
+ 
+
   return <div>
       <ProfileIcon>
      <NavLink to='#'>
@@ -137,7 +143,7 @@ const userLink=()=>{
    </RightSidebar>
           <RightSidebar>
      
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={cartSize-1} color="primary">
          
               <NavLink to='/cart'><ShoppingCartTwoTone fontSize="large" style = {{ marginBottom:8}}/></NavLink>
              
