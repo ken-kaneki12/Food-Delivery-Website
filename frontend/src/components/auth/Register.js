@@ -50,7 +50,7 @@ const registerUser=async(e)=>{
     },config);
     // console.log(data);
     // console.log(data.status)
-    localStorage.setItem('userinfo',JSON.stringify(data))
+    // localStorage.setItem('userinfo',JSON.stringify(data))
  
     setStatus(200);
     if(data){

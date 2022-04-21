@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/actions/shoppingCartAction";
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -120,7 +121,10 @@ const [singlefood,setSinglefood]=useState('');
 const[quantity,setQuantity]=useState(1);
 const [status,setStatus]=useState('');
 const {id}=useParams();
+const dispatch=useDispatch()
 /* console.log(id) */
+
+
 useEffect(()=>{
   const getSingleFood=async()=>{
     try{ 
@@ -150,7 +154,7 @@ quantity>1 &&setQuantity(quantity-1)
 }
 
 const handleCart=()=>{
-  
+  dispatch(addToCart(singlefood,quantity))
 }
   return (
     <Container>
@@ -194,7 +198,7 @@ const handleCart=()=>{
               <Amount><h4>{quantity}</h4></Amount>
               <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
-            <Button onClick={handleCart}>ADD TO CART</Button>
+            <Button onClick={handleCart()}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

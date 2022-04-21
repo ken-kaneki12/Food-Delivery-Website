@@ -14,4 +14,13 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth;
+const authandverify = (req, res, next) => {
+  auth(req, res, () => {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+      next();
+    } else {
+      res.status(403).json("You are not alowed to do that!");
+    }
+  });
+};
+module.exports = {auth,authandverify};

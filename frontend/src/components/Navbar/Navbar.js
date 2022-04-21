@@ -66,7 +66,7 @@ padding-bottom: 10px;
 `
 const Navbar = () => {
 const cart=useSelector(state=>state.shopcart);
- console.log(cart)
+//  console.log(cart)
 
 const auth=useSelector(state=>state.auth);
 const{user,isLogged}=auth

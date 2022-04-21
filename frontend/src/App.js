@@ -37,6 +37,7 @@ if(userinfo){
 useEffect(() => {
   if(token){
     const getUser = () => {
+    
       dispatch(dispatchLogin())
 
       return fetchUser(token).then(res => {
@@ -46,6 +47,9 @@ useEffect(() => {
     getUser()
   }
 },[token,dispatch])
+
+
+
 const preventRefresh = (e) => {
   e.preventDefault();
 

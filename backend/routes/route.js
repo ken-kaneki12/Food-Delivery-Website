@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const verify = require("../middlewares/verfitytoken");
+
 const adminCheck = require("../middlewares/admincheck");
 const foodsCtrl = require("../controllers/foodControl");
 const userCtrl = require("../controllers/userControl");
 const authCtrl = require("../controllers/authControl");
-const restaurantCtrl=require("../controllers/restaurantControl");
+const restaurantCtrl = require("../controllers/restaurantControl");
+const cartCtrl=require("../controllers/cartControl");
 
 //foods crud routes
 
@@ -54,6 +56,16 @@ router.delete("/deleteuser/:id", verify, adminCheck, userCtrl.deleteUser);
 router.post("/postRest",restaurantCtrl.postRest);
 
 router.get("/getAllRest",restaurantCtrl.getAllRest);
+
+//Cart
+
+ router.post("/postCart", verify,cartCtrl.postCart);
+
+ router.put("/updateCart/:id", verify,cartCtrl.updateCart);
+
+ router.delete("/deleteCart/:id", verify,cartCtrl.deleteCart);
+
+ router.get("/getCart", verify,cartCtrl.getCart);
 
 
 module.exports = router;
