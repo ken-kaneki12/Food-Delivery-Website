@@ -2,8 +2,8 @@
 import ACTIONS from '../actions';
 import axios from "axios";
 
-export const addToCart = (data, qty) => async (dispatch, getState) => {
-//   const { data } = await axios.get(`/getSingleFood/${id}`);
+export const addToCart = (id, qty) => async (dispatch, getState) => {
+  const { data } = await axios.get(`/getSingleFood/${id}`);
 //  console.log(data)
 //  console.log(qty)
   dispatch({
@@ -18,7 +18,7 @@ export const addToCart = (data, qty) => async (dispatch, getState) => {
     },
   });
 
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+  // localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 };
 
 export const removeFromCart = (id) => (dispatch, getState) => {
@@ -27,5 +27,5 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     payload: id,
   });
 
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+  // localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 };

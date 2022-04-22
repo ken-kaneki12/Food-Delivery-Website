@@ -143,7 +143,7 @@ const userLink=()=>{
    </RightSidebar>
           <RightSidebar>
      
-            <Badge badgeContent={cartSize-1} color="primary">
+            <Badge badgeContent={cartSize} color="primary">
          
               <NavLink to='/cart'><ShoppingCartTwoTone fontSize="large" style = {{ marginBottom:8}}/></NavLink>
              

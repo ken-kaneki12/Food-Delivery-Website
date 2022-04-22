@@ -1,5 +1,5 @@
 import { Add, Remove } from '@material-ui/icons';
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -100,12 +100,13 @@ const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
- 
+  
 `;
 
 const ProductPrice = styled.div`
@@ -156,11 +157,27 @@ const Button = styled.button`
 const Cart = () => {
   const dispatch=useDispatch();
   const cart=useSelector(state=>state.cart)
-  const{cartItems}=cart
+  const{cartItems,totalPrice}=cart;
+  const[rangeItem,setRangeItem]=useState([]);
+  const[quantity,setQuantity]=useState(1);
+  const[pro,setPro]=useState([])
+
   // console.log(cartItems)
 // var size = Object.keys(cartItems).length;
-var filtercartItems =  cartItems.filter(item => item.product!==undefined);
+// var filtercartItems =  cartItems.filter(item => item.product!==undefined);
 //  console.log(filtercartItems )
+
+const handleQuantity=(type,id)=>{
+ 
+  if(type==="DEC"){
+    
+     dispatch({type:'DEC',payload:id})
+  }else if(type==="INC"){
+ 
+     dispatch({type:'INC',payload:id})
+  }
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -175,14 +192,14 @@ var filtercartItems =  cartItems.filter(item => item.product!==undefined);
         </Top>
         <Bottom>
           <Info>
-          {filtercartItems .map(item=>(
+          {cartItems .map((item,key)=>(
           
-           <Product>
+           <Product key={key}>
               <ProductDetail>
                 <Image src={item.foodImg} />
                 <Details>
                   <ProductName>
-                    <b>Product:</b> {item.foodName}
+                    <b>Product:</b> {item.foodName} 
                   </ProductName>
                   <ProductId>
                     <b>ID:</b>{item.product}
@@ -195,13 +212,14 @@ var filtercartItems =  cartItems.filter(item => item.product!==undefined);
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add/>
+                  <Add  onClick={()=>dispatch({type:'INC',payload:item})}/>
                   <ProductAmount>{item.qty}</ProductAmount>
-                  <Remove/>
+                  <Remove  onClick={()=>dispatch({type:'DEC',payload:item})}/>
                 </ProductAmountContainer>
-                <ProductPrice>{item.foodPrice * item.qty}</ProductPrice>
+                <ProductPrice>{item.qty * item.foodPrice }</ProductPrice>
               </PriceDetail>
             </Product>
+      
              ))}
             <Hr />
            
@@ -210,7 +228,7 @@ var filtercartItems =  cartItems.filter(item => item.product!==undefined);
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>

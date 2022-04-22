@@ -121,7 +121,7 @@ const [singlefood,setSinglefood]=useState('');
 const[quantity,setQuantity]=useState(1);
 const [status,setStatus]=useState('');
 const {id}=useParams();
-const dispatch=useDispatch()
+
 /* console.log(id) */
 
 
@@ -152,10 +152,11 @@ quantity>1 &&setQuantity(quantity-1)
   setQuantity(quantity+1)
 }
 }
-
-const handleCart=()=>{
-  dispatch(addToCart(singlefood,quantity))
-}
+const dispatch=useDispatch()
+ const handleCart=()=>{
+  dispatch(addToCart(id,quantity))
+ 
+} 
   return (
     <Container>
   
@@ -198,11 +199,13 @@ const handleCart=()=>{
               <Amount><h4>{quantity}</h4></Amount>
               <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
-            <Button onClick={handleCart()}>ADD TO CART</Button>
+            <Button onClick={handleCart}>ADD TO CART</Button> 
           </AddContainer>
+     
         </InfoContainer>
+        
       </Wrapper>
-
+     
       <Footer />
     </Container>
   );
