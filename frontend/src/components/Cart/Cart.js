@@ -1,8 +1,12 @@
-import { Add, Remove } from '@material-ui/icons';
+import { Add, DeleteForever, Remove } from '@material-ui/icons';
 import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux';
+import {removeFromCart} from '../redux/actions/shoppingCartAction'
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import StripeCheckout from 'react-stripe-checkout';
+const KEY='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -153,30 +157,55 @@ const Button = styled.button`
   color: white;
   font-weight: 600;
 `;
-
+const PriceAndDel=styled.div`
+display: flex;
+margin-left: 120px;
+`
+const Del=styled.div`
+margin-left: 100px;
+padding-top:10px ;
+color: red;
+cursor: pointer;
+font-size:larger ;
+`
+const Strip=styled.div`
+font-size: larger;
+/* width: ; */
+`
 const Cart = () => {
   const dispatch=useDispatch();
   const cart=useSelector(state=>state.cart)
   const{cartItems,totalPrice}=cart;
   const[rangeItem,setRangeItem]=useState([]);
   const[quantity,setQuantity]=useState(1);
-  const[pro,setPro]=useState([])
+
+const [stripeToken,setStripeToken]=useState('')
+const onToken=(token)=>{
+setStripeToken(token)
+}
+// console.log(stripeToken)
+useEffect(()=>{
+const stripeReq=()=>{
+  try{
+   const res= axios.post('/checkout',{
+     tokenId:stripeToken,
+     amount:totalPrice*100
+    
+   })
+   console.log(res.data)
+  }catch(err){
+
+  }
+}
+stripeReq()
+},[stripeToken,totalPrice])
 
   // console.log(cartItems)
 // var size = Object.keys(cartItems).length;
 // var filtercartItems =  cartItems.filter(item => item.product!==undefined);
 //  console.log(filtercartItems )
 
-const handleQuantity=(type,id)=>{
- 
-  if(type==="DEC"){
-    
-     dispatch({type:'DEC',payload:id})
-  }else if(type==="INC"){
- 
-     dispatch({type:'INC',payload:id})
-  }
-  }
+
 
   return (
     <Container>
@@ -215,8 +244,14 @@ const handleQuantity=(type,id)=>{
                   <Add  onClick={()=>dispatch({type:'INC',payload:item})}/>
                   <ProductAmount>{item.qty}</ProductAmount>
                   <Remove  onClick={()=>dispatch({type:'DEC',payload:item})}/>
+                  
                 </ProductAmountContainer>
+                <PriceAndDel>
                 <ProductPrice>{item.qty * item.foodPrice }</ProductPrice>
+                <Del >
+                  <DeleteForever fontSize="large" onClick={()=>dispatch(removeFromCart(item.product))}/>
+                  </Del>   
+               </PriceAndDel>
               </PriceDetail>
             </Product>
       
@@ -224,6 +259,7 @@ const handleQuantity=(type,id)=>{
             <Hr />
            
           </Info>
+
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
@@ -242,7 +278,23 @@ const handleQuantity=(type,id)=>{
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ 80</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <Strip>
+            <StripeCheckout
+        
+              name="FoodSwipe"
+              image="https://res.cloudinary.com/cse347/image/upload/v1650646049/FoodSwipe/277916694_424414652779262_4711146425304990146_n_foza7j.png"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${totalPrice}`}
+              amount={totalPrice * 100}
+              token={onToken}
+              stripeKey={KEY}
+           
+            >
+              <Button >CHECKOUT NOW</Button>
+     
+            </StripeCheckout>
+            </Strip>
           </Summary>
         </Bottom>
       </Wrapper>

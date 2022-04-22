@@ -6,6 +6,7 @@ const dotenv=require('dotenv');
 require('./db/conn')
 //import route
 const routes=require('./routes/route')
+const stripeRoutes=require('./routes/stripe')
 //import dotenv
 dotenv.config({ path: './config/hidden.env' });
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(cookieParser())
 app.use(express.json());
 app.use(routes);
+app.use(stripeRoutes)
 
 
 // app.get('/',(req,res)=>{
