@@ -4,13 +4,13 @@ import { AccountCircleOutlined, Search,ShoppingCartTwoTone } from "@material-ui/
 import { Avatar, Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
+import ProfileDropDown from './ProfileDropDown'
 
-import axios from 'axios'
 const Container = styled.div`
  
    background-color: #f1f0f063;
    height: 70px;
-  
+
 `;
 const Cart=styled.div``
 const Wrapper = styled.div`
@@ -32,19 +32,8 @@ const Logo = styled.div`
   font-weight: bold;
   cursor: pointer;
 `;
-const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  padding: 5px;
-`;
-const Input = styled.input`
-  border: none;
-`;
-const Center = styled.div`
-  flex: 1;
-`;
+
+
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -63,7 +52,7 @@ display: flex;
 `;
 const ProfileIcon=styled.div`
 display: flex;
-padding-bottom: 10px;
+/* padding-bottom: 10px; */
 `
 const Navbar = () => {
 const cart=useSelector(state=>state.cart);
@@ -74,15 +63,7 @@ const  cartSize = Object.keys(cartItems).length;
 const auth=useSelector(state=>state.auth);
 const{user,isLogged}=auth
 
-const handleLogout = async () => {
-  try {
-      await axios.get('/logout')
-      localStorage.removeItem('userinfo')
-      window.location.href = "/";
-  } catch (err) {
-      window.location.href = "/";
-  }
-}
+
 
 
 const userLink=()=>{
@@ -91,14 +72,9 @@ const userLink=()=>{
 
   return <div>
       <ProfileIcon>
-     <NavLink to='#'>
- 
-     <Avatar alt={user.name} src={user.avatar} /> 
-     </NavLink>
 
-    <RightSidebar> 
-          <NavLink to='/'  onClick={handleLogout}><h5>LOGOUT</h5></NavLink>
-          </RightSidebar> 
+     <ProfileDropDown/>
+  
 
      </ProfileIcon>
   </div>

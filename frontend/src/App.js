@@ -13,7 +13,9 @@ import Cart from "./components/Cart/Cart";
 import NotFound from "./components/utils/NotFound/NotFound";
 import Success from './components/utils/Success/Success'
 import { Routes, Route } from "react-router-dom";
-import AuthOutlet from "./privateRoute/AuthOutlet"
+import AuthOutlet from "./privateRoute/AuthOutlet";
+import ProfileDropDown from './components/Navbar/ProfileDropDown';
+import Dashboard from "./components/Dashboard/Dashboard";
 import axios from "axios";
 
 function App() {
@@ -70,7 +72,7 @@ const preventRefresh = (e) => {
         <Route path="login" element={<Login />} />
       <Route path="activate/:activation_token" element={<ActivationEmail />} />
         <Route path="forgotpassword" element={<ForgotPassword/>} />
-        <Route path="/sample" element={<Success/>}/>
+        <Route path="/sample" element={<Dashboard/>}/>
         <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} onClick={preventRefresh}/>
         {/* <Route path="/RestaurantMenu/:Restaurant/:foodName" element={<FoodMenu/>} onClick={preventRefresh}/> */}
 
