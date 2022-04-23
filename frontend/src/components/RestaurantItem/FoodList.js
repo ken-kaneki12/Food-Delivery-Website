@@ -6,7 +6,7 @@ import {
   PageviewOutlined
 } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
-
+import Rating from '@material-ui/lab/Rating';
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -111,8 +111,8 @@ const FoodList = ({ items }) => {
     <Card>
     <CardContainer>
     <p ><b color="green">{items.foodName}</b></p>
-    
-    <p><b>RATING:{items.foodRating}</b></p>
+    <p><b>Price:{items.foodPrice}</b></p>
+    <Rating name="size-medium" defaultValue={items.foodRating} />
 </CardContainer>
     </Card>
     </div>  

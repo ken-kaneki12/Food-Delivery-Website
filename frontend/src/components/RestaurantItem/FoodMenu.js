@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Searchbar from "../Filter/Searchbar/Searchbar";
 import Foods from "./Foods";
@@ -32,6 +32,7 @@ const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
+  padding-left:130px ;
 `;
 const BoxFilter=styled.div`
  padding-left: 1120px;
@@ -45,6 +46,7 @@ const Option = styled.option``;
 padding-top: 20px;
 `; */
 const FoodMenu = () => {
+  const dispatch=useDispatch();
   const location=useLocation();
  const RestaurantName=location.pathname.split("/")[2];
  const [filters,setFilters]=useState({});
@@ -56,6 +58,10 @@ const FoodMenu = () => {
    ...filters,
     [e.target.name]:value
   })
+ }
+ const SortPriceHandler=(e)=>{
+   /* console.log(e.target.value) */
+   dispatch({type:'SortPrice',payload:e.target.value})
  }
 /* console.log(filters) */
   return (
@@ -84,8 +90,8 @@ const FoodMenu = () => {
 
         <Filter>
         <BoxFilter>
-        <FilterText>SORT BY:</FilterText>
-          <Select name="PRICE" onChange={(e)=>setSort(e.target.value)}>
+        <FilterText>SORT BY(PRICE):</FilterText>
+          <Select name="PRICE" onChange={SortPriceHandler}>
             <Option value="default">DEFAULT</Option>
             <Option value="asc">LOW-HIGH</Option>
             <Option value="desc">HIGH-LOW</Option>

@@ -10,7 +10,7 @@ const shoppingCartReducer = (state = CART_INITIAL_STATE, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
       const item = action.payload;
-      console.log(item)
+      // console.log(item)
 
       const existItem = state.cartItems.find((x) => x.product === item.product);
 
@@ -37,7 +37,7 @@ const shoppingCartReducer = (state = CART_INITIAL_STATE, action) => {
 
    case 'INC':
  const item2 = action.payload;
-       console.log(action.payload)
+      //  console.log(action.payload)
        const temp= state.cartItems.find((x) => x.product === item2.product);
       const findInd=state.cartItems.findIndex((x) => x.product === item2.product);
       //  console.log(findInd)

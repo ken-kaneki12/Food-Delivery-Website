@@ -1,7 +1,8 @@
 
 const initialState = {
  searchItem:'',
- checbox:''
+ rating:'',
+ sort:''
 }
 
 
@@ -14,8 +15,30 @@ const filterReducer = (state = initialState, action) => {
        ...state,
        searchItem: action.payload
      }
-        // return action.payload
-      
+       
+     case 'SortPrice':
+
+        // console.log(action.payload)
+     return{
+       ...state,
+       sort: action.payload
+     }
+
+    case 'ratingFilter':
+   return{
+     ...state,
+     rating: action.payload
+   }
+       
+        
+
+
+
+
+
+
+
+
 
     //   case 'DEC':
     //     const item3 = action.payload;

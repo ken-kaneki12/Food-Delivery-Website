@@ -14,15 +14,15 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-const Foods = ({RestaurantName,filters,sort}) => {
+const Foods = ({RestaurantName,filters}) => {
   // console.log(RestaurantName,filters,sort)
   const[foods,setFoods]=useState([])
   const[status,setStatus]=useState('')
-  const {Restaurant,foodName}=useParams()
+  const {Restaurant}=useParams()
   // console.log(Restaurant)
   //  console.log(useParams())
   const filter=useSelector(state=>state.filter)
-  const{searchItem}=filter
+  const{searchItem,sort,rating  }=filter
   // console.log(searchItem)
    useEffect(()=>{
     const  getSearchFood=async()=>{
@@ -62,6 +62,44 @@ const Foods = ({RestaurantName,filters,sort}) => {
      }
       getAllFoods()
   },[Restaurant])
+
+  useEffect(()=>{
+    const  getSortFoods=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`/getSortFoods?restId=${Restaurant}&sortTag=${sort} `,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getSortFoods()
+  },[sort])
+ 
+  useEffect(()=>{
+    const  getRatingFood=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`/getRatingFood?restId=${Restaurant}&rating=${rating} `,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getRatingFood()
+  },[rating])
 
   return (
     <Container>

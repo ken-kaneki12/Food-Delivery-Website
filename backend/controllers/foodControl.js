@@ -74,6 +74,69 @@ try{
         }
     },
 
+  getSortFoods:async(req,res)=>{
+      // console.log(req.query)
+   
+ const sortTag = req.query.sortTag;
+ const foodRestId = req.query.restId;
+// console.log(sortTag,foodRestId)
+  if(sortTag==='asc'){
+        try{
+          const foods=await foodSchema.find({foodRestId:foodRestId}).sort({foodPrice:1})
+          res.status(200).send(foods)
+          
+        }catch(err){
+          return res.status(400).send(err)
+        }
+    }
+    else if(sortTag==='desc'){
+      try{
+        const foods=await foodSchema.find({foodRestId:foodRestId}).sort({foodPrice:-1})
+        res.status(200).send(foods)
+        
+      }catch(err){
+        return res.status(400).send(err)
+      }
+    }
+    else{
+      try{
+        const foods=await foodSchema.find({foodRestId:foodRestId})
+        res.status(200).send(foods)
+        
+      }catch(err){
+        return res.status(400).send(err)
+      }
+    }
+  },
+
+  getRatingFood:async(req,res)=>{
+    const foodRestId=req.query.restId;
+    const foodRating= req.query.rating;
+  //  console.log(foodRating)
+  if(foodRating>0){
+      try{
+        const foods= await foodSchema.find({
+          $and:[
+            {foodRestId:foodRestId},
+            {foodRating:foodRating} 
+            
+          ]
+         } )
+        res.status(200).send(foods)
+        
+      }catch(err){
+        return res.status(400).send(err)
+      }
+    }else{
+      try{
+        const foods= await foodSchema.find({foodRestId:foodRestId})
+        res.status(200).send(foods)
+        
+      }catch(err){
+        return res.status(400).send(err)
+      }
+    }
+  },
     getAllFoods:async(req,res)=>{
       // console.log(req.query)
  

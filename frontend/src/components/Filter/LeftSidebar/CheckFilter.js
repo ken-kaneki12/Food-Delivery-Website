@@ -1,5 +1,6 @@
 import { Checkbox,  FormControlLabel, FormGroup } from '@material-ui/core'
 import React,{useState} from 'react'
+import {useDispatch} from 'react-redux'
 import styled from 'styled-components'
 import Rating from '@material-ui/lab/Rating';
 
@@ -12,7 +13,11 @@ max-width: 550px;
 
 `
 const CheckFilter = () => {
+const dispatch=useDispatch()
 
+const handleRating=(e)=>{
+  dispatch({type:'ratingFilter',payload:e.target.value})
+}
 
   return (
     
@@ -24,7 +29,7 @@ const CheckFilter = () => {
         <br />
         <br />
         <h5>RATING</h5>
-        <Rating name="size-medium" defaultValue={2} />
+        <Rating name="size-medium" defaultValue={0} onChange={handleRating}/>
         <br />
         <br />    
         </Size>
