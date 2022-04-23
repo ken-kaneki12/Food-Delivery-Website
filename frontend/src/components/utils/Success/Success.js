@@ -2,7 +2,9 @@ import { Button } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
 
-const Container=styled.div``
+const Container=styled.div`
+/* position: fixed; */
+`
 
 const Title=styled.h2`
 padding-top: 20px;

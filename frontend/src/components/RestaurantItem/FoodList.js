@@ -35,7 +35,8 @@ const Container = styled.div`
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
-
+  padding-bottom: 10px;
+  
   &:hover ${Info}{
     opacity: 1;
   }
@@ -51,9 +52,24 @@ const Container = styled.div`
 
 const Image = styled.img`
   height: 100%;
+  width:100%;
   z-index: 2;
+  object-fit: cover;
+
 `;
-const FoodDetails=styled.div``
+const Card=styled.div`
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  ;
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+`
+const CardContainer=styled.div`
+padding: 2px 16px;
+`
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -92,13 +108,13 @@ const FoodList = ({ items }) => {
         </Icon>
       </Info>
     </Container>
-    <FoodDetails>
-    
+    <Card>
+    <CardContainer>
     <p ><b color="green">{items.foodName}</b></p>
     
-    {items.foodRating}
-
-    </FoodDetails>
+    <p><b>RATING:{items.foodRating}</b></p>
+</CardContainer>
+    </Card>
     </div>  
       
   );

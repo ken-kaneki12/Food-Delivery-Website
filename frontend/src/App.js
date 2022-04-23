@@ -72,6 +72,7 @@ const preventRefresh = (e) => {
         <Route path="forgotpassword" element={<ForgotPassword/>} />
         <Route path="/sample" element={<Success/>}/>
         <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} onClick={preventRefresh}/>
+        {/* <Route path="/RestaurantMenu/:Restaurant/:foodName" element={<FoodMenu/>} onClick={preventRefresh}/> */}
 
         <Route  element={<AuthOutlet/>}>
 

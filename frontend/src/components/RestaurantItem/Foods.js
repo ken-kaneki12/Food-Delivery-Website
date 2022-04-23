@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from "styled-components";
 import FoodList from "./FoodList";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 
@@ -17,8 +18,32 @@ const Foods = ({RestaurantName,filters,sort}) => {
   // console.log(RestaurantName,filters,sort)
   const[foods,setFoods]=useState([])
   const[status,setStatus]=useState('')
-  const {Restaurant}=useParams()
+  const {Restaurant,foodName}=useParams()
   // console.log(Restaurant)
+  //  console.log(useParams())
+  const filter=useSelector(state=>state.filter)
+  const{searchItem}=filter
+  // console.log(searchItem)
+   useEffect(()=>{
+    const  getSearchFood=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`/getSearchFood?foodRestId=${Restaurant}&foodName=${searchItem} `,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getSearchFood()
+  },[Restaurant,searchItem])
+
+  
   useEffect(()=>{
     const getAllFoods=async()=>{
       try{ 
@@ -36,7 +61,7 @@ const Foods = ({RestaurantName,filters,sort}) => {
          }  
      }
       getAllFoods()
-  },[])
+  },[Restaurant])
 
   return (
     <Container>

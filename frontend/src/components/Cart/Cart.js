@@ -179,26 +179,23 @@ const Cart = () => {
   const[rangeItem,setRangeItem]=useState([]);
   const[quantity,setQuantity]=useState(1);
 
-const [stripeToken,setStripeToken]=useState('')
-const onToken=(token)=>{
-setStripeToken(token)
-}
-// console.log(stripeToken)
-useEffect(()=>{
-const stripeReq=()=>{
-  try{
-   const res= axios.post('/checkout',{
-     tokenId:stripeToken,
-     amount:totalPrice*100
-    
-   })
-   console.log(res.data)
-  }catch(err){
 
-  }
-}
-stripeReq()
-},[stripeToken,totalPrice])
+    const onToken = token => {
+      const body = {
+        amount: 999,
+        token: token
+    };
+    axios .post("http://localhost:5000/payment", body)
+        .then(response => {
+          console.log(response);
+          alert("Payment Success");
+        })
+        .catch(error => {
+          console.log("Payment Error: ", error);
+          alert("Payment Error");
+        });
+    };
+
 
   // console.log(cartItems)
 // var size = Object.keys(cartItems).length;

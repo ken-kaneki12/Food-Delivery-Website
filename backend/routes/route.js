@@ -15,6 +15,7 @@ router.post("/postFood", foodsCtrl.postFood);
 router.get("/getSingleFood/:id", foodsCtrl.getSingleFood); 
 
 router.get("/getAllFoods", foodsCtrl.getAllFoods); 
+router.get("/getSearchFood", foodsCtrl.getSearchFood); 
 
 // router.post("/postFood", verify, adminCheck, foodsCtrl.postFood);
 

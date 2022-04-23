@@ -43,14 +43,7 @@ try{
     },
 
     getSingleFood:async(req,res)=>{
-      // const foods= await foodSchema.find({
-      //   $and:[
-      //   {foodRestId:'starkabab'},{foodName:'nehiri'}
-      //   ]
-      // });
-      // console.log(req.params.id)
-      // const foodRestId = req.query.restId;
-
+   
       const foods= await foodSchema.findById(req.params.id);
         try{
           res.status(200).send(foods)
@@ -59,11 +52,33 @@ try{
           return res.status(400).send(err)
         }
     },
+    getSearchFood:async(req,res)=>{
+      const foodRestId = req.query.foodRestId;
+      const foodName=req.query.foodName; 
+    //  console.log(foodRestId)
+         try{
+          const foods=await foodSchema.find({
+            $and:[
+              {foodRestId:foodRestId},
+              {foodName:{
+               $regex:req.query.foodName
+              }
+              
+              }
+            ]
+            });
+          res.status(200).send(foods)
+          
+        }catch(err){
+          return res.status(400).send(err)
+        }
+    },
+
     getAllFoods:async(req,res)=>{
       // console.log(req.query)
  
+ const foodRestId = req.query.restId;
 
-  const foodRestId = req.query.restId;
 
         try{
           const foods=await foodSchema.find({foodRestId:foodRestId})

@@ -49,7 +49,7 @@ const FoodMenu = () => {
  const RestaurantName=location.pathname.split("/")[2];
  const [filters,setFilters]=useState({});
  const [sort,setSort]=useState('default')
- const handleFilters=(e)=>{
+ const CatagoryFilters=(e)=>{
 
   const value= e.target.value
   setFilters({
@@ -60,7 +60,7 @@ const FoodMenu = () => {
 /* console.log(filters) */
   return (
     <Container>
-      <Searchbar />
+      <Searchbar RestaurantName={RestaurantName}/>
       
       <FilterContainer>
         <Filter>
@@ -69,7 +69,7 @@ const FoodMenu = () => {
           </Side>
   <Title>Catagories</Title> 
       
-        <FormGroup  onChange={handleFilters} >
+        <FormGroup  onChange={CatagoryFilters} >
           <FormControlLabel control={<Checkbox />} label="BURGER" value="BURGER" name="cat" />
      
         <FormControlLabel control={<Checkbox />} label="Pizza" value="Pizza" name="cat" />   
